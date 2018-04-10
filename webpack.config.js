@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const MinifyPlugin = require('babel-minify-webpack-plugin');
+// const MinifyPlugin = require('babel-minify-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -34,7 +34,7 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015',  'minify']
+        presets: ['es2015']
       },
     }, {
       test: /\.styl/,
@@ -44,21 +44,23 @@ module.exports = {
           loader: 'css-loader',
           options: {
             minimize: true,
+            url: false,
           },
         }, {
           loader: 'stylus-loader',
           options: {
             preferPathResolver: 'webpack', // Faster
+            'resolve url': true,
           },
         }],
       })
+    }, {
+      test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+      loader: 'file-loader',
     }],
   },
 
   plugins: [
-    new MinifyPlugin({}, {
-      comments: false,
-    }),
     new ExtractTextPlugin('../css/site.css'),
     // Copy the images folder and optimize all the images
     new CopyWebpackPlugin([
