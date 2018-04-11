@@ -1,4 +1,25 @@
-  <footer id="footer">
+<?php
+  $footer_options = get_site_option('_igv_footer_options');
+  $hours = $footer_options['_igv_gallery_hours'];
+  $address = $footer_options['_igv_gallery_address'];
+  $email = $footer_options['_igv_gallery_email'];
+?>
+
+  <footer id="footer" class="padding-top-large">
+    <div class="container">
+      <div class="grid-row">
+        <div class="grid-item item-s-12 item-m-6">
+          <div id="footer-holder" class="border-top padding-top-small">
+            <div class="font-uppercase font-bold">
+              Galería Agustina Ferreyra
+            </div>
+            <? echo !empty($hours) ? '<div class="margin-top-small">' . $hours . '</div>' : ''; ?>
+            <? echo !empty($address) ? '<div class="margin-top-small">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
+            <? echo !empty($email) ? '<div class="margin-top-small"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
 </section>
