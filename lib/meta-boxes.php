@@ -48,13 +48,13 @@ function igv_cmb_metaboxes() {
   $exhibition_metabox->add_field( array(
 		'name' => esc_html__( 'Start Date', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_start',
-		'type' => 'text_datetime_timestamp_timezone',
+		'type' => 'text_date_timestamp',
 	) );
 
   $exhibition_metabox->add_field( array(
 		'name' => esc_html__( 'End Date', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_end',
-		'type' => 'text_datetime_timestamp_timezone',
+		'type' => 'text_date_timestamp',
 	) );
 
   $exhibition_metabox->add_field( array(
