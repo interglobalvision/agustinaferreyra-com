@@ -57,5 +57,69 @@ function igv_cmb_metaboxes() {
 		'type' => 'text_datetime_timestamp_timezone',
 	) );
 
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Artists', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_artists',
+		'type' => 'text',
+	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Title', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_title',
+		'type' => 'text',
+	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Press Release PDF', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_pdf',
+		'type' => 'file',
+    'options' => array(
+  		'url' => false, // Hide the text input for the url
+  	),
+    'text'    => array(
+  		'add_upload_file_text' => 'Add PDF'
+  	),
+  	// query_args are passed to wp.media's library query.
+  	'query_args' => array(
+  		'type' => 'application/pdf', // Make library only display PDFs.
+  	),
+	) );
+
+  $exhibition_images_group = $exhibition_metabox->add_field( array(
+		'id'          => $prefix . 'exhibition_images',
+		'type'        => 'group',
+		'options'     => array(
+			'group_title'   => esc_html__( 'Image {#}', 'cmb2' ), // {#} gets replaced by row number
+			'add_button'    => esc_html__( 'Add Another Image', 'cmb2' ),
+			'remove_button' => esc_html__( 'Remove Image', 'cmb2' ),
+			'sortable'      => true, // beta
+		),
+	) );
+
+  $exhibition_metabox->add_group_field( $exhibition_images_group, array(
+		'name' => esc_html__( 'Image', 'cmb2' ),
+		'id'   => 'image',
+		'type' => 'file',
+	) );
+
+  $exhibition_metabox->add_group_field( $exhibition_images_group, array(
+		'name' => esc_html__( 'Caption', 'cmb2' ),
+		'id'   => 'caption',
+		'type' => 'wysiwyg',
+	) );
+
+  $location_metabox = new_cmb2_box( array(
+		'id'               => $prefix . 'location_metabox',
+		'title'            => esc_html__( 'Details', 'cmb2' ), // Doesn't output for term boxes
+		'object_types'     => array( 'term' ), // Tells CMB2 to use term_meta vs post_meta
+		'taxonomies'       => array( 'location' ), // Tells CMB2 which taxonomies should have these fields
+	) );
+
+  $location_metabox->add_field( array(
+		'name'    => esc_html__( 'City', 'cmb2' ),
+		'id'      => $prefix . 'location_city',
+		'type'    => 'text',
+	) );
+
 }
 ?>
