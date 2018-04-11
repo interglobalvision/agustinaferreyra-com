@@ -39,5 +39,23 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
+  $exhibition_metabox = new_cmb2_box( array(
+ 		'id'            => $prefix . 'exhibition_metabox',
+ 		'title'         => esc_html__( 'Details', 'cmb2' ),
+ 		'object_types'  => array( 'exhibition' ), // Post type
+ 	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Start Date', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_start',
+		'type' => 'text_datetime_timestamp_timezone',
+	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'End Date', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_end',
+		'type' => 'text_datetime_timestamp_timezone',
+	) );
+
 }
 ?>
