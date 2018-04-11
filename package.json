@@ -40,6 +40,7 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
-    "aos": "^2.2.0"
+    "aos": "^2.2.0",
+    "globie-styl-library": "^1.0.2"
   }
 }
