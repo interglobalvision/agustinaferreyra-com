@@ -41,7 +41,7 @@ get_template_part('partials/seo');
       </div>
 
       <nav id="main-nav">
-        <ul class="grid-row justify-end font-uppercase">
+        <ul class="grid-row justify-end font-uppercase font-bold">
           <li class="grid-item">
             <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
           </li>
