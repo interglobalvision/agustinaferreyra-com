@@ -58,7 +58,7 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_field( array(
-		'name' => esc_html__( 'Title', 'cmb2' ),
+		'name' => esc_html__( 'Exhibition title', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_title',
 		'type' => 'text',
 	) );
