@@ -3,7 +3,6 @@
 
 // Import dependencies
 import lazySizes from 'lazysizes';
-import AOS from 'aos';
 
 // Import style
 import '../styl/site.styl';
