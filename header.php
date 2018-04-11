@@ -29,5 +29,29 @@ get_template_part('partials/seo');
 <section id="main-container">
 
   <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+    <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
+
+    <div class="container">
+      <div class="grid-row">
+        <div class="grid-item item-s-10 item-m-5">
+          <div id="logo-holder">
+            <?php get_template_part('partials/logo'); ?>
+          </div>
+        </div>
+      </div>
+
+      <nav id="main-nav">
+        <ul class="grid-row justify-end font-uppercase">
+          <li class="grid-item">
+            <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('artists'); ?>">Artists</a>
+          </li>
+          <li class="grid-item">
+            <a href="<?php echo home_url('everything-else'); ?>">Everything else</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
