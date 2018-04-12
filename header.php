@@ -33,7 +33,7 @@ get_template_part('partials/seo');
 
     <div class="container">
       <div class="grid-row">
-        <div class="grid-item item-s-10 item-m-5">
+        <div class="grid-item item-s-10 item-m-4">
           <div id="logo-holder">
             <?php get_template_part('partials/logo'); ?>
           </div>
