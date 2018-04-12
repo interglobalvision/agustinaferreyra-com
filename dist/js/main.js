@@ -187,16 +187,16 @@ var Site = function () {
       var _this = this;
 
       if (_this.$postit.length) {
-        var imageHeight = _this.$postit.outerHeight();
-        var imageWidth = _this.$postit.outerWidth();
+        var imageHeight = _this.$postit.outerHeight() * 1.2; // 1.2 to account for rotation
+        var imageWidth = _this.$postit.outerWidth() * 1.2;
 
-        var maxTop = 100 - imageHeight / _this.windowHeight * 100;
+        var maxTop = 100 - imageHeight / _this.windowHeight * 100; // image size percentage of window
         var maxLeft = 100 - imageWidth / _this.windowWidth * 100;
 
-        var randomTop = _this.randomInt(maxTop);
-        var randomLeft = _this.randomInt(maxLeft);
+        var randomTop = _this.randomInt(maxTop - 5, 5); // min 5% from any edge
+        var randomLeft = _this.randomInt(maxLeft - 5, 5);
 
-        var randomRotate = _this.randomInt(10, -10);
+        var randomRotate = _this.randomInt(10, -10); // random rotation -10 to 10deg
 
         _this.$postit.css({
           'top': randomTop + 'vh',
