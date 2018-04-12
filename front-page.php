@@ -2,15 +2,27 @@
 get_header();
 ?>
 
+<?php
+  $site_options = get_site_option('_igv_site_options');
+
+  if (!empty($site_options['_igv_frontpage_postit_image_id'])) {
+?>
+<div id="postit">
+  <?php echo wp_get_attachment_image($site_options['_igv_frontpage_postit_image_id'], 'thumbnail', false, 'class=postit-image'); ?>
+  <div id="postit-dot" class="dot"></div>
+</div>
+<?php
+  }
+?>
+
 <main id="main-content">
   <section id="posts">
     <div class="container">
-      <div class="grid-row">
 
 <?php
 $now = time();
 
-$args = array(
+$current_args = array(
 	'post_type' => array( 'exhibition' ),
   'orderby' => 'meta_value_num',
   'meta_key' => '_igv_exhibition_start',
@@ -29,34 +41,66 @@ $args = array(
 	),
 );
 
-$current_query = new WP_Query( $args );
+$current_query = new WP_Query( $current_args );
 
 if ( $current_query->have_posts() ) {
 ?>
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row">
+      <div class="grid-row margin-bottom-basic">
+        <div class="grid-item item-s-12 item-m-6 frontpage-section-label">
+          <div>Current</div>
+        </div>
+        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter">
 <?php
 	while ( $current_query->have_posts() ) {
 		$current_query->the_post();
-?>
 
-          <article <?php post_class('grid-item item-s-12 no-gutter'); ?> id="post-<?php the_ID(); ?>">
-
-            <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
-
-          </article>
-
-<?php
+    get_template_part('partials/archive-exhibition-item');
   }
 ?>
         </div>
+      </div>
 <?php
 }
 
-// Restore original Post Data
+wp_reset_postdata();
+
+$upcoming_args = array(
+	'post_type' => array( 'exhibition' ),
+  'orderby' => 'meta_value_num',
+  'meta_key' => '_igv_exhibition_start',
+  'meta_query' => array(
+		array(
+			'key'     => '_igv_exhibition_start',
+			'value'   => $now,
+			'compare' => '>=',
+		),
+	),
+);
+
+$upcoming_query = new WP_Query( $upcoming_args );
+
+if ( $upcoming_query->have_posts() ) {
+?>
+      <div class="grid-row margin-bottom-basic">
+        <div class="grid-item item-s-12 item-m-6 frontpage-section-label">
+          <div>Upcoming</div>
+        </div>
+        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter">
+<?php
+	while ( $upcoming_query->have_posts() ) {
+		$upcoming_query->the_post();
+
+    get_template_part('partials/archive-exhibition-item');
+  }
+?>
+        </div>
+      </div>
+<?php
+}
+
 wp_reset_postdata();
 ?>
 
-      </div>
     </div>
   </section>
 
