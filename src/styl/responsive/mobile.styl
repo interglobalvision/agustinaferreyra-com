@@ -3,12 +3,6 @@ $border-style = 1px solid $color-black
 .border-top
   border-top: $border-style
 
-.frontpage-section-label
-  div
-    width: 100%
-    border-bottom: $border-style
-    padding-bottom: $margin-tiny
-
 #postit
   position: absolute
   z-index: -1
@@ -20,3 +14,21 @@ $border-style = 1px solid $color-black
   top: -10px
   left: 45%
   background-color: $color-black
+
+// ******************************************************
+
+// HEADER
+
+#main-nav
+  ul.grid-row
+    justify-content: space-between
+
+// ******************************************************
+
+// FRONT PAGE
+
+.frontpage-section-label
+  div
+    width: 100%
+    border-bottom: $border-style
+    padding-bottom: $margin-tiny
