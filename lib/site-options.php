@@ -4,60 +4,6 @@ add_action( 'cmb2_admin_init', 'igv_register_theme_options_metabox' );
 function igv_register_theme_options_metabox() {
   $prefix = '_igv_';
 
-  $footer_options = new_cmb2_box( array(
-    'id'           => $prefix . 'footer_options_page',
-    'title'        => esc_html__( 'Footer Options', 'cmb2' ),
-    'object_types' => array( 'options-page' ),
-    /*
-     * The following parameters are specific to the options-page box
-     * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
-     */
-    'option_key'      => $prefix . 'footer_options', // The option key and admin menu page slug.
-    'icon_url'        => 'dashicons-layout', // Menu icon. Only applicable if 'parent_slug' is left empty.
-    // 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
-    // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
-    'capability'      => 'manage_options', // Cap required to view options-page.
-    // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
-    // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-    // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
-    'save_button'     => esc_html__( 'Save', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-  ) );
-
-  $footer_options->add_field( array(
-    'name'    => esc_html__( 'Footer options', 'cmb2' ),
-    'id'      => 'title',
-    'type'    => 'title',
-  ) );
-
-  $footer_options->add_field( array(
-    'name'    => esc_html__( 'Gallery hours', 'cmb2' ),
-    'id'      =>  $prefix . 'gallery_hours',
-    'type'    => 'text',
-    'default' => 'Wednesday to Saturday 12–6PM',
-  ) );
-
-  $footer_options->add_field( array(
-    'name'    => esc_html__( 'Gallery address', 'cmb2' ),
-    'id'      =>  $prefix . 'gallery_address',
-    'type'    => 'wysiwyg',
-    'options' => array(
-      'media_buttons' => false,
-      'teeny'         => true,
-      'tinymce'       => true,
-      'textarea_rows' => 3,
-    ),
-    'default' => 'Tomas Alva Edison 137
-    San Rafael, 06470
-    Ciudad de México, CDMX',
-  ) );
-
-  $footer_options->add_field( array(
-    'name'    => esc_html__( 'Gallery email', 'cmb2' ),
-    'id'      =>  $prefix . 'gallery_email',
-    'type'    => 'text',
-    'default' => 'info@agustinaferreyra.com',
-  ) );
-
   // Site options for general data
 
   $site_options = new_cmb2_box( array(
@@ -76,6 +22,53 @@ function igv_register_theme_options_metabox() {
     // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
     // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
     // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Misc', 'cmb2' ),
+    'id'      => $prefix . 'misc_title',
+    'type'    => 'title',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Homepage postit image', 'cmb2' ),
+    'id'      => $prefix . 'frontpage_postit_image',
+    'type'    => 'file',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Footer', 'cmb2' ),
+    'id'      => $prefix . 'footer_title',
+    'type'    => 'title',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Gallery hours', 'cmb2' ),
+    'id'      => $prefix . 'gallery_hours',
+    'type'    => 'text',
+    'default' => 'Wednesday to Saturday 12–6PM',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Gallery address', 'cmb2' ),
+    'id'      => $prefix . 'gallery_address',
+    'type'    => 'wysiwyg',
+    'options' => array(
+      'media_buttons' => false,
+      'teeny'         => true,
+      'tinymce'       => true,
+      'textarea_rows' => 3,
+    ),
+    'default' => 'Tomas Alva Edison 137
+    San Rafael, 06470
+    Ciudad de México, CDMX',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Gallery email', 'cmb2' ),
+    'id'      => $prefix . 'gallery_email',
+    'type'    => 'text',
+    'default' => 'info@agustinaferreyra.com',
   ) );
 
   // Social Media variables
