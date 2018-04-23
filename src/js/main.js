@@ -22,7 +22,7 @@ class Site {
     this.$windowWidth = $(window).width();
 
     this.dotSize();
-    this.postitDot();
+    this.positionPostit();
   }
 
   onReady() {
