@@ -1,2 +1,32 @@
+$border-style = 1px solid $color-black
+
 .border-top
-  border-top: 1px solid $color-black
+  border-top: $border-style
+
+#postit
+  position: absolute
+  z-index: -1
+  width: 150px
+  transform: rotate(-10deg)
+
+#postit-dot
+  position: absolute
+  top: -10px
+  left: 45%
+  background-color: $color-black
+
+// ******************************************************
+
+// HEADER
+
+#main-nav-list-row
+  justify-content: space-between
+
+// ******************************************************
+
+// FRONT PAGE
+
+.frontpage-section-label
+  width: 100%
+  border-bottom: $border-style
+  padding-bottom: $margin-tiny

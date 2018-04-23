@@ -33,7 +33,7 @@ get_template_part('partials/seo');
 
     <div class="container">
       <div class="grid-row">
-        <div class="grid-item item-s-10 item-m-5">
+        <div class="grid-item item-s-10 item-m-4">
           <div id="logo-holder">
             <?php get_template_part('partials/logo'); ?>
           </div>
@@ -41,8 +41,8 @@ get_template_part('partials/seo');
       </div>
 
       <nav id="main-nav">
-        <ul class="grid-row justify-end font-uppercase font-bold">
-          <li class="grid-item">
+        <ul id="main-nav-list-row" class="grid-row font-uppercase font-bold">
+          <li class="grid-item offset-m-6">
             <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
           </li>
           <li class="grid-item">

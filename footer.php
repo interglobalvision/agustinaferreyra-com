@@ -1,8 +1,8 @@
 <?php
-  $footer_options = get_site_option('_igv_footer_options');
-  $hours = $footer_options['_igv_gallery_hours'];
-  $address = $footer_options['_igv_gallery_address'];
-  $email = $footer_options['_igv_gallery_email'];
+  $site_options = get_site_option('_igv_site_options');
+  $hours = $site_options['_igv_gallery_hours'];
+  $address = $site_options['_igv_gallery_address'];
+  $email = $site_options['_igv_gallery_email'];
 ?>
 
   <footer id="footer" class="padding-top-large">
