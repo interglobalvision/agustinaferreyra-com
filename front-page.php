@@ -23,22 +23,22 @@ get_header();
 $now = time();
 
 $current_args = array(
-	'post_type' => array( 'exhibition' ),
+  'post_type' => array( 'exhibition' ),
   'orderby' => 'meta_value_num',
   'meta_key' => '_igv_exhibition_start',
   'meta_query' => array(
     'relation' => 'AND',
-		array(
-			'key'     => '_igv_exhibition_start',
-			'value'   => $now,
-			'compare' => '<=',
-		),
     array(
-			'key'     => '_igv_exhibition_end',
-			'value'   => $now,
-			'compare' => '>=',
-		),
-	),
+      'key'     => '_igv_exhibition_start',
+      'value'   => $now,
+      'compare' => '<=',
+    ),
+    array(
+      'key'     => '_igv_exhibition_end',
+      'value'   => $now,
+      'compare' => '>=',
+    ),
+  ),
 );
 
 $current_query = new WP_Query( $current_args );
@@ -65,16 +65,16 @@ if ( $current_query->have_posts() ) {
 wp_reset_postdata();
 
 $upcoming_args = array(
-	'post_type' => array( 'exhibition' ),
+  'post_type' => array( 'exhibition' ),
   'orderby' => 'meta_value_num',
   'meta_key' => '_igv_exhibition_start',
   'meta_query' => array(
-		array(
-			'key'     => '_igv_exhibition_start',
-			'value'   => $now,
-			'compare' => '>=',
-		),
-	),
+    array(
+      'key'     => '_igv_exhibition_start',
+      'value'   => $now,
+      'compare' => '>=',
+    ),
+  ),
 );
 
 $upcoming_query = new WP_Query( $upcoming_args );
