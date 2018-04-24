@@ -119,9 +119,14 @@ var Site = function () {
       this.dotDiameter = 15;
 
       this.$postit = $('#postit');
+      this.$hoverDotItem = $('.hover-dot');
+      this.$hoverDot = $('.hover-dot .dot');
+      this.$logoDot = $('svg#logo path.logo-dot');
+      this.$postitDot = $('#postit-dot');
 
       this.dotSize();
       this.positionPostit();
+      this.bindHoverDots();
     }
   }, {
     key: 'fixWidows',
@@ -136,11 +141,10 @@ var Site = function () {
   }, {
     key: 'dotSize',
     value: function dotSize() {
-      var $dot = $('svg path.logo-dot');
       var _this = this;
 
-      if ($dot.length) {
-        _this.dotDiameter = $dot.first().width();
+      if (_this.$logoDot.length) {
+        _this.dotDiameter = _this.$logoDot.first().width();
       }
 
       $('.dot').css({
@@ -148,8 +152,6 @@ var Site = function () {
         'width': _this.dotDiameter,
         'border-radius': _this.dotDiameter
       });
-
-      this.stylePostitDot();
     }
   }, {
     key: 'positionPostit',
@@ -173,18 +175,54 @@ var Site = function () {
           'left': randomLeft + 'vw',
           'transform': 'rotate(' + randomRotate + 'deg)'
         });
+
+        this.positionPostitDot();
       }
     }
   }, {
-    key: 'stylePostitDot',
-    value: function stylePostitDot() {
+    key: 'positionPostitDot',
+    value: function positionPostitDot() {
       var _this = this;
 
-      if (_this.$postit.length) {
-        $('#postit-dot').css({
-          'top': '-' + _this.dotDiameter / 2 + 'px'
+      _this.$postitDot.css({
+        'top': '-' + _this.dotDiameter / 2 + 'px'
+      });
+    }
+  }, {
+    key: 'bindHoverDots',
+    value: function bindHoverDots() {
+      var _this = this;
+
+      if (_this.$hoverDotItem.length) {
+
+        _this.positionHoverDots();
+
+        _this.$hoverDotItem.on({
+          mouseenter: function mouseenter() {
+            $(this).addClass('show-dot');
+          },
+          mouseleave: function mouseleave() {
+            $(this).removeClass('show-dot');
+          }
         });
       }
+    }
+  }, {
+    key: 'positionHoverDots',
+    value: function positionHoverDots() {
+      var _this = this;
+
+      var offset = _this.dotDiameter + 10;
+
+      _this.$hoverDot.each(function () {
+        var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
+        var randomLeft = _this.randomInt(100 - offset, offset);
+
+        $(this).css({
+          'top': randomTop + '%',
+          'left': randomLeft + '%'
+        });
+      });
     }
   }, {
     key: 'randomInt',
