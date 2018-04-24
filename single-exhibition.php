@@ -63,7 +63,11 @@ if (have_posts()) {
             foreach($images as $image) {
           ?>
           <div class="masonry-item">
-            <?php echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true'); ?>
+            <?php
+              echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true');
+
+              echo !empty($image['caption']) ? '<div class="masonry-item-caption margin-top-tiny">' . apply_filters('the_content', $image['caption']) . '</div>' : '';
+            ?>
           </div>
           <?php
             }
