@@ -33,10 +33,10 @@ $current_query = new WP_Query( $current_args );
 if ( $current_query->have_posts() ) {
 ?>
       <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 exhibitions-section-label-holder">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
           <div class="exhibitions-section-label">Current</div>
         </div>
-        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
 <?php
 	while ( $current_query->have_posts() ) {
 		$current_query->the_post();
@@ -69,10 +69,10 @@ $upcoming_query = new WP_Query( $upcoming_args );
 if ( $upcoming_query->have_posts() ) {
 ?>
       <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 exhibitions-section-label-holder">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
           <div class="exhibitions-section-label">Upcoming</div>
         </div>
-        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
 <?php
 	while ( $upcoming_query->have_posts() ) {
 		$upcoming_query->the_post();
@@ -105,10 +105,10 @@ $past_query = new WP_Query( $past_args );
 if ( $past_query->have_posts() ) {
 ?>
       <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 exhibitions-section-label-holder">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
           <div class="exhibitions-section-label">Past</div>
         </div>
-        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
 <?php
 	while ( $past_query->have_posts() ) {
 		$past_query->the_post();
