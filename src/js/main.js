@@ -3,6 +3,7 @@
 
 // Import dependencies
 import lazySizes from 'lazysizes';
+import Masonry from 'masonry-layout';
 
 // Import style
 import '../styl/site.styl';
@@ -23,6 +24,7 @@ class Site {
 
     this.dotSize();
     this.positionPostit();
+    this.layoutMasonry();
   }
 
   onReady() {
@@ -33,9 +35,11 @@ class Site {
     this.dotDiameter = 15;
 
     this.$postit = $('#postit');
+    this.$masonryHolder = $('.masonry-holder');
 
     this.dotSize();
     this.positionPostit();
+    this.layoutMasonry();
   }
 
   fixWidows() {
@@ -95,6 +99,32 @@ class Site {
         'top': '-' + (_this.dotDiameter / 2) + 'px',
       });
     }
+  }
+
+  initMasonry() {
+    var _this = this;
+
+    if (_this.$masonryHolder.length) {
+      _this.masonryInstance = new Masonry( '.masonry-holder', {
+        itemSelector: '.masonry-item',
+        transitionDuration: 0,
+        initLayout: false
+      });
+
+      _this.masonryInstance.on('layoutComplete', function() {
+        _this.$masonryHolder.removeClass('u-visuallyhidden');
+      });
+
+      _this.layoutMasonry();
+    }
+  }
+
+  layoutMasonry() {
+    var _this = this;
+
+    _this.$masonryHolder.addClass('u-visuallyhidden');
+
+    _this.masonryInstance.layout();
   }
 
   randomInt(max, min = 0) {
