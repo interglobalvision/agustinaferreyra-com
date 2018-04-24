@@ -31,12 +31,12 @@ $current_args = array(
     array(
       'key'     => '_igv_exhibition_start',
       'value'   => $now,
-      'compare' => '<=',
+      'compare' => '<',
     ),
     array(
       'key'     => '_igv_exhibition_end',
       'value'   => $now,
-      'compare' => '>=',
+      'compare' => '>',
     ),
   ),
 );
@@ -72,7 +72,7 @@ $upcoming_args = array(
     array(
       'key'     => '_igv_exhibition_start',
       'value'   => $now,
-      'compare' => '>=',
+      'compare' => '>',
     ),
   ),
 );
