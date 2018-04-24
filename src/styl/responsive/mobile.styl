@@ -9,11 +9,24 @@ $border-style = 1px solid $color-black
   width: 150px
   transform: rotate(-10deg)
 
+.dot
+  background-color: $color-black
+
 #postit-dot
   position: absolute
   top: -10px
   left: 45%
-  background-color: $color-black
+
+.hover-dot
+  .dot
+    position: absolute
+    top: 50%
+    left: 50%
+    visibility: hidden
+    pointer-events: none
+  &.show-dot
+    .dot
+      visibility: visible
 
 // ******************************************************
 
@@ -31,3 +44,4 @@ $border-style = 1px solid $color-black
   width: 100%
   border-bottom: $border-style
   padding-bottom: $margin-tiny
+  text-transform: uppercase
