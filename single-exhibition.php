@@ -17,6 +17,7 @@ if (have_posts()) {
     $end = get_post_meta($post->ID, '_igv_exhibition_end', true);
     $location = wp_get_post_terms($post->ID, 'location');
     $pr_pdf = get_post_meta($post->ID, '_igv_exhibition_pdf', true);
+    $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
         <div class="grid-row">
@@ -52,6 +53,25 @@ if (have_posts()) {
             </div>
           </div>
         </div>
+
+        <?php
+          if (!empty($images)) {
+        ?>
+        <div class="masonry-holder">
+          <div class="masonry-gutter"></div>
+          <?php
+            foreach($images as $image) {
+          ?>
+          <div class="masonry-item">
+            <?php echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true'); ?>
+          </div>
+          <?php
+            }
+          ?>
+        </div>
+        <?php
+          }
+        ?>
       </article>
 <?php
   }

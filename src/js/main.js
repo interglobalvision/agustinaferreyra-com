@@ -4,6 +4,7 @@
 // Import dependencies
 import lazySizes from 'lazysizes';
 import Masonry from 'masonry-layout';
+import imagesLoaded from 'imagesloaded';
 
 // Import style
 import '../styl/site.styl';
@@ -33,13 +34,14 @@ class Site {
     this.windowHeight = $(window).height();
     this.windowWidth = $(window).width();
     this.dotDiameter = 15;
+    this.masonryImagesLoaded = false;
 
     this.$postit = $('#postit');
     this.$masonryHolder = $('.masonry-holder');
 
     this.dotSize();
     this.positionPostit();
-    this.layoutMasonry();
+    this.initMasonry();
   }
 
   fixWidows() {
@@ -105,26 +107,32 @@ class Site {
     var _this = this;
 
     if (_this.$masonryHolder.length) {
-      _this.masonryInstance = new Masonry( '.masonry-holder', {
-        itemSelector: '.masonry-item',
-        transitionDuration: 0,
-        initLayout: false
-      });
+      imagesLoaded( '.masonry-holder', function() {
+        _this.masonryImagesLoaded = true;
 
-      _this.masonryInstance.on('layoutComplete', function() {
-        _this.$masonryHolder.removeClass('u-visuallyhidden');
-      });
+        _this.masonryInstance = new Masonry( '.masonry-holder', {
+          itemSelector: '.masonry-item',
+          transitionDuration: 0,
+          initLayout: false,
+          percentPosition: true
+        });
 
-      _this.layoutMasonry();
+        _this.masonryInstance.on('layoutComplete', function() {
+          _this.$masonryHolder.removeClass('hidden');
+        });
+
+        _this.layoutMasonry();
+      });
     }
   }
 
   layoutMasonry() {
     var _this = this;
 
-    _this.$masonryHolder.addClass('u-visuallyhidden');
-
-    _this.masonryInstance.layout();
+    if (_this.masonryImagesLoaded) {
+      _this.$masonryHolder.addClass('hidden');
+      _this.masonryInstance.layout();
+    }
   }
 
   randomInt(max, min = 0) {
