@@ -33,9 +33,14 @@ class Site {
     this.dotDiameter = 15;
 
     this.$postit = $('#postit');
+    this.$hoverDotItem = $('.hover-dot');
+    this.$hoverDot = $('.hover-dot .dot');
+    this.$logoDot = $('svg#logo path.logo-dot');
+    this.$postitDot = $('#postit-dot');
 
     this.dotSize();
     this.positionPostit();
+    this.bindHoverDots();
   }
 
   fixWidows() {
@@ -48,11 +53,10 @@ class Site {
   }
 
   dotSize() {
-    var $dot = $('svg path.logo-dot');
     var _this = this;
 
-    if ($dot.length) {
-      _this.dotDiameter = $dot.first().width();
+    if (_this.$logoDot.length) {
+      _this.dotDiameter = _this.$logoDot.first().width();
     }
 
     $('.dot').css({
@@ -60,8 +64,6 @@ class Site {
       'width': _this.dotDiameter,
       'border-radius': _this.dotDiameter,
     });
-
-    this.stylePostitDot();
   }
 
   positionPostit() {
@@ -84,17 +86,52 @@ class Site {
         'left': randomLeft + 'vw',
         'transform': 'rotate(' + randomRotate + 'deg)',
       });
+
+      this.positionPostitDot();
     }
   }
 
-  stylePostitDot() {
+  positionPostitDot() {
     var _this = this;
 
-    if (_this.$postit.length) {
-      $('#postit-dot').css({
-        'top': '-' + (_this.dotDiameter / 2) + 'px',
+    _this.$postitDot.css({
+      'top': '-' + (_this.dotDiameter / 2) + 'px',
+    });
+  }
+
+  bindHoverDots() {
+    var _this = this;
+
+    if (_this.$hoverDotItem.length) {
+
+      _this.positionHoverDots();
+
+      _this.$hoverDotItem.on({
+        mouseenter: function(){
+          $(this).addClass('show-dot');
+        },
+        mouseleave: function(){
+          $(this).removeClass('show-dot');
+        },
       });
     }
+  }
+
+  positionHoverDots() {
+    var _this = this;
+
+    var offset = _this.dotDiameter + 10;
+
+    _this.$hoverDot.each(function() {
+      var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
+      var randomLeft = _this.randomInt(100 - offset, offset);
+
+      $(this).css({
+        'top': randomTop + '%',
+        'left': randomLeft + '%',
+      });
+    });
+
   }
 
   randomInt(max, min = 0) {

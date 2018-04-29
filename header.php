@@ -42,14 +42,17 @@ get_template_part('partials/seo');
 
       <nav id="main-nav">
         <ul id="main-nav-list-row" class="grid-row font-uppercase font-bold">
-          <li class="grid-item offset-m-6">
+          <li class="grid-item offset-m-6 hover-dot">
             <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
+            <div class="dot"></div>
           </li>
-          <li class="grid-item">
+          <li class="grid-item hover-dot">
             <a href="<?php echo home_url('artists'); ?>">Artists</a>
+            <div class="dot"></div>
           </li>
-          <li class="grid-item">
+          <li class="grid-item hover-dot">
             <a href="<?php echo home_url('everything-else'); ?>">Everything else</a>
+            <div class="dot"></div>
           </li>
         </ul>
       </nav>

@@ -60,41 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109,11 +79,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 // Import style
 
 
-var _lazysizes = __webpack_require__(2);
+var _lazysizes = __webpack_require__(1);
 
 var _lazysizes2 = _interopRequireDefault(_lazysizes);
 
-__webpack_require__(4);
+__webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -137,7 +107,7 @@ var Site = function () {
       this.$windowWidth = $(window).width();
 
       this.dotSize();
-      this.postitDot();
+      this.positionPostit();
     }
   }, {
     key: 'onReady',
@@ -149,9 +119,14 @@ var Site = function () {
       this.dotDiameter = 15;
 
       this.$postit = $('#postit');
+      this.$hoverDotItem = $('.hover-dot');
+      this.$hoverDot = $('.hover-dot .dot');
+      this.$logoDot = $('svg#logo path.logo-dot');
+      this.$postitDot = $('#postit-dot');
 
       this.dotSize();
       this.positionPostit();
+      this.bindHoverDots();
     }
   }, {
     key: 'fixWidows',
@@ -166,11 +141,10 @@ var Site = function () {
   }, {
     key: 'dotSize',
     value: function dotSize() {
-      var $dot = $('svg path.logo-dot');
       var _this = this;
 
-      if ($dot.length) {
-        _this.dotDiameter = $dot.first().width();
+      if (_this.$logoDot.length) {
+        _this.dotDiameter = _this.$logoDot.first().width();
       }
 
       $('.dot').css({
@@ -178,8 +152,6 @@ var Site = function () {
         'width': _this.dotDiameter,
         'border-radius': _this.dotDiameter
       });
-
-      this.stylePostitDot();
     }
   }, {
     key: 'positionPostit',
@@ -203,18 +175,54 @@ var Site = function () {
           'left': randomLeft + 'vw',
           'transform': 'rotate(' + randomRotate + 'deg)'
         });
+
+        this.positionPostitDot();
       }
     }
   }, {
-    key: 'stylePostitDot',
-    value: function stylePostitDot() {
+    key: 'positionPostitDot',
+    value: function positionPostitDot() {
       var _this = this;
 
-      if (_this.$postit.length) {
-        $('#postit-dot').css({
-          'top': '-' + _this.dotDiameter / 2 + 'px'
+      _this.$postitDot.css({
+        'top': '-' + _this.dotDiameter / 2 + 'px'
+      });
+    }
+  }, {
+    key: 'bindHoverDots',
+    value: function bindHoverDots() {
+      var _this = this;
+
+      if (_this.$hoverDotItem.length) {
+
+        _this.positionHoverDots();
+
+        _this.$hoverDotItem.on({
+          mouseenter: function mouseenter() {
+            $(this).addClass('show-dot');
+          },
+          mouseleave: function mouseleave() {
+            $(this).removeClass('show-dot');
+          }
         });
       }
+    }
+  }, {
+    key: 'positionHoverDots',
+    value: function positionHoverDots() {
+      var _this = this;
+
+      var offset = _this.dotDiameter + 10;
+
+      _this.$hoverDot.each(function () {
+        var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
+        var randomLeft = _this.randomInt(100 - offset, offset);
+
+        $(this).css({
+          'top': randomTop + '%',
+          'left': randomLeft + '%'
+        });
+      });
     }
   }, {
     key: 'randomInt',
@@ -231,7 +239,7 @@ var Site = function () {
 new Site();
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -928,11 +936,40 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return lazysizes;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
 
 /***/ }),
-/* 3 */,
-/* 4 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
