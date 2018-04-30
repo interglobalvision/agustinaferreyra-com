@@ -107,7 +107,6 @@ var Site = function () {
       this.$windowWidth = $(window).width();
 
       this.dotSize();
-      this.positionPostit();
     }
   }, {
     key: 'onReady',
