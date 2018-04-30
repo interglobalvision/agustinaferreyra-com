@@ -74,7 +74,7 @@ if (have_posts()) {
           ?>
         </div>
 
-        <div class="carousel-overlay">
+        <div id="carousel-overlay">
           <div class="slick-carousel">
             <?php
               foreach($images as $image) {

@@ -65,9 +65,11 @@ class Site {
     var _this = this;
 
     if ($dot.length) {
+      // get dot diameter of first dot in logo svg
       _this.dotDiameter = $dot.first().width();
     }
 
+    // resize all dots to match dots in logo svg
     $('.dot').css({
       'height': _this.dotDiameter,
       'width': _this.dotDiameter,
@@ -92,6 +94,7 @@ class Site {
 
       var randomRotate = _this.randomInt(10, -10); // random rotation -10 to 10deg
 
+      // random position & rotation of post-it
       _this.$postit.css({
         'top': randomTop + 'vh',
         'left': randomLeft + 'vw',
@@ -104,6 +107,7 @@ class Site {
     var _this = this;
 
     if (_this.$postit.length) {
+      // position post-it dot halfway off the top of post-it image
       $('#postit-dot').css({
         'top': '-' + (_this.dotDiameter / 2) + 'px',
       });
@@ -125,6 +129,7 @@ class Site {
         });
 
         _this.masonryInstance.on('layoutComplete', function() {
+          // show masonry container after layout
           _this.$masonryHolder.removeClass('hidden');
         });
 
@@ -137,32 +142,49 @@ class Site {
     var _this = this;
 
     if (_this.masonryImagesLoaded) {
+      // hide masonry container during layout
       _this.$masonryHolder.addClass('hidden');
+
+      // layout masonry items
       _this.masonryInstance.layout();
     }
   }
 
   randomInt(max, min = 0) {
+    // return random interger between min & max
+
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   bindCarouselToggles() {
     var _this = this;
 
+    // active state to prevent duplicate clicks
+    var carouselActive = false;
+
     if ($('.carousel-trigger').length) {
       $('.carousel-trigger').on('click', function() {
-        _this.scrollOffset = _this.$window.scrollTop();
+        if (!carouselActive) {
+          carouselActive = true;
 
-        _this.$mainContainer.css('top', '-' + _this.scrollOffset + 'px');
+          // #main-container is set absolute and positioned
+          // to prevent overflow scrolling while overlay
+          // is open
+          _this.scrollOffset = _this.$window.scrollTop();
+          _this.$mainContainer.css('top', '-' + _this.scrollOffset + 'px');
 
-        _this.$body.addClass('carousel-active');
+          _this.$body.addClass('carousel-active');
+        }
       });
 
-      $('.carousel-overlay').on('click', function(e) {
+      $('#carousel-overlay').on('click', function(e) {
         if (!$(e.target).hasClass('slick-arrow')) {
           _this.$body.removeClass('carousel-active');
 
+          // reset scroll position
           _this.$window.scrollTop(_this.scrollOffset);
+
+          carouselActive = false;
         }
       });
     }
