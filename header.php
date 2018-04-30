@@ -28,18 +28,10 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="margin-top-mid margin-bottom-large">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
 
     <div class="container">
-      <div class="grid-row">
-        <div class="grid-item item-s-10 item-m-4">
-          <div id="logo-holder">
-            <?php get_template_part('partials/logo'); ?>
-          </div>
-        </div>
-      </div>
-
       <nav id="main-nav">
         <ul id="main-nav-list-row" class="grid-row font-uppercase font-bold">
           <li class="grid-item offset-m-6 hover-dot">
@@ -56,5 +48,8 @@ get_template_part('partials/seo');
           </li>
         </ul>
       </nav>
+      <div class="mobile-only">
+        <?php get_template_part('partials/logo'); ?>
+      </div>
     </div>
   </header>

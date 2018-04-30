@@ -18,10 +18,12 @@ class Site {
   }
 
   onResize() {
-    this.$windowHeight = $(window).height();
-    this.$windowWidth = $(window).width();
+    this.windowHeight = $(window).height();
+    this.windowWidth = $(window).width();
 
     this.dotSize();
+    this.positionPostit();
+    this.sizeLogoHolder();
   }
 
   onReady() {
@@ -36,10 +38,13 @@ class Site {
     this.$hoverDot = $('.hover-dot .dot');
     this.$logoDot = $('svg#logo path.logo-dot');
     this.$postitDot = $('#postit-dot');
+    this.$logoHolder = $('#logo-holder');
+    this.$logo = $('#logo-holder .logo');
 
     this.dotSize();
     this.positionPostit();
     this.bindHoverDots();
+    this.sizeLogoHolder();
   }
 
   fixWidows() {
@@ -131,6 +136,18 @@ class Site {
       });
     });
 
+  }
+
+  sizeLogoHolder() {
+    var _this = this;
+
+    if (_this.$logoHolder.length) {
+      var offset = _this.$logoHolder.offset().top;
+      var logoHeight = _this.$logo.height();
+      var padding = _this.windowHeight - offset - logoHeight;
+
+      _this.$logoHolder.css('padding-top', padding + 'px');
+    }
   }
 
   randomInt(max, min = 0) {
