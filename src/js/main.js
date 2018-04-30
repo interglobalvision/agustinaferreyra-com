@@ -5,6 +5,7 @@
 import lazySizes from 'lazysizes';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
+import slick from 'slick-carousel';
 
 // Import style
 import '../styl/site.styl';
@@ -36,12 +37,18 @@ class Site {
     this.dotDiameter = 15;
     this.masonryImagesLoaded = false;
 
+    this.$window = $(window);
+    this.$body = $('body');
+    this.$mainContainer = $('#main-container');
     this.$postit = $('#postit');
     this.$masonryHolder = $('.masonry-holder');
+    this.$slickCarousel = $('.slick-carousel');
 
     this.dotSize();
     this.positionPostit();
     this.initMasonry();
+    this.bindCarouselToggles();
+    this.initCarousel();
   }
 
   fixWidows() {
@@ -137,6 +144,46 @@ class Site {
 
   randomInt(max, min = 0) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  bindCarouselToggles() {
+    var _this = this;
+
+    if ($('.carousel-trigger').length) {
+      $('.carousel-trigger').on('click', function() {
+        _this.scrollOffset = _this.$window.scrollTop();
+
+        _this.$mainContainer.css('top', '-' + _this.scrollOffset + 'px');
+
+        _this.$body.addClass('carousel-active');
+      });
+
+      $('.carousel-overlay').on('click', function(e) {
+        if (!$(e.target).hasClass('slick-arrow')) {
+          _this.$body.removeClass('carousel-active');
+
+          _this.$window.scrollTop(_this.scrollOffset);
+        }
+      });
+    }
+  }
+
+  initCarousel() {
+    var _this = this;
+
+    if (_this.$slickCarousel.length) {
+      _this.$slickCarousel.slick({
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        centerMode: true,
+        variableWidth: true,
+        dots: false,
+        arrows: true,
+        focusOnSelect: false,
+        rows: 0
+      });
+    }
   }
 }
 

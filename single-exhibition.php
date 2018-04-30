@@ -62,9 +62,9 @@ if (have_posts()) {
           <?php
             foreach($images as $image) {
           ?>
-          <div class="masonry-item">
+          <div class="masonry-item carousel-trigger">
             <?php
-              echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true');
+              echo wp_get_attachment_image($image['image_id'], 'full', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true'));
 
               echo !empty($image['caption']) ? '<div class="masonry-item-caption margin-top-tiny">' . apply_filters('the_content', $image['caption']) . '</div>' : '';
             ?>
@@ -72,6 +72,24 @@ if (have_posts()) {
           <?php
             }
           ?>
+        </div>
+
+        <div class="carousel-overlay">
+          <div class="slick-carousel">
+            <?php
+              foreach($images as $image) {
+            ?>
+            <div class="slide-content-holder">
+              <div class="grid-column justify-center align-items-center">
+                <div>
+                  <?php echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true'); ?>
+                </div>
+              </div>
+            </div>
+            <?php
+              }
+            ?>
+          </div>
         </div>
         <?php
           }
