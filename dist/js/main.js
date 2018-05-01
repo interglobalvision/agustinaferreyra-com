@@ -142,7 +142,6 @@ var Site = function () {
       this.dotSize();
       this.positionPostit();
       this.initMasonry();
-      this.bindCarouselToggles();
       this.initCarousel();
     }
   }, {
@@ -268,15 +267,19 @@ var Site = function () {
       var carouselActive = false;
 
       if ($('.carousel-trigger').length) {
-        $('.carousel-trigger').on('click', function () {
+        $('.carousel-trigger').on('click', function (e) {
           if (!carouselActive) {
             carouselActive = true;
+
+            var index = $(e.target).attr('data-index');
 
             // #main-container is set absolute and positioned
             // to prevent overflow scrolling while overlay
             // is open
             _this.scrollOffset = _this.$window.scrollTop();
             _this.$mainContainer.css('top', '-' + _this.scrollOffset + 'px');
+
+            _this.$slickCarousel.slick('slickGoTo', index, true);
 
             _this.$body.addClass('carousel-active');
           }
@@ -311,6 +314,8 @@ var Site = function () {
           focusOnSelect: false,
           rows: 0
         });
+
+        this.bindCarouselToggles();
       }
     }
   }]);

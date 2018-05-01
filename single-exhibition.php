@@ -60,16 +60,19 @@ if (have_posts()) {
         <div class="masonry-holder">
           <div class="masonry-gutter"></div>
           <?php
+            $index = 0;
+
             foreach($images as $image) {
           ?>
-          <div class="masonry-item carousel-trigger">
+          <div class="masonry-item">
             <?php
-              echo wp_get_attachment_image($image['image_id'], 'full', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true'));
+              echo wp_get_attachment_image($image['image_id'], 'full', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true','data-index'=>$index));
 
               echo !empty($image['caption']) ? '<div class="masonry-item-caption margin-top-tiny">' . apply_filters('the_content', $image['caption']) . '</div>' : '';
             ?>
           </div>
           <?php
+              $index++;
             }
           ?>
         </div>
