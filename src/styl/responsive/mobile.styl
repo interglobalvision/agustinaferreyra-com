@@ -1,4 +1,12 @@
 $border-style = 1px solid $color-black
+$carousel-arrow-diameter = 50px
+
+html, body
+  height:100%
+  width: 100vw
+
+#main-container
+  min-width: 100%
 
 .border-top
   border-top: $border-style
@@ -49,3 +57,97 @@ $border-style = 1px solid $color-black
   border-bottom: $border-style
   padding-bottom: $margin-tiny
   text-transform: uppercase
+
+// ******************************************************
+
+// MASONRY
+
+.masonry-holder
+  &.hidden
+    visibility: hidden
+
+.masonry-item
+  width: 50%
+  padding: 0 $margin-small $margin-basic
+
+// ******************************************************
+
+// CAROUSEL
+
+.carousel-trigger
+  cursor: pointer
+
+#carousel-overlay
+  background: rgba(255,255,255,1)
+  position: fixed
+  pointer-events: none
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  opacity: 0
+  z-index: 1000
+  transition: opacity 300ms ease-in-out
+
+body.carousel-active
+  position: absolute
+  overflow-y: hidden
+  #main-container
+    position: absolute
+  #carousel-overlay
+    pointer-events: auto
+    opacity: 1
+
+.slick-carousel
+  width: 100vw
+  height: 100vh
+
+.slick-list
+  display: block
+  position: relative
+  margin: 0
+  padding: 0
+
+.slick-track
+  position: relative
+  top: 0
+  left: 0
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+.slide-content-holder
+  width: 100vw
+  height: 100vh
+  .grid-column
+    width: 100%
+    height: 100%
+  img
+    height: auto
+    width: auto
+    max-height: 80vh
+    max-width: 80vw
+
+.slick-arrow
+  background-color: $color-black
+  font-size: 0
+  appearance: none
+  width: $carousel-arrow-diameter
+  height: $carousel-arrow-diameter
+  border-radius: $carousel-arrow-diameter
+  border: 0
+  position: fixed
+  top: calc("50vh - " + ($carousel-arrow-diameter / 2))
+  z-index: 1200
+  cursor: pointer
+  padding: 0
+  &:focus
+    outline: 0
+
+.slick-prev
+  left: 3vw
+  clip-path: polygon(-10% -10%,50% -10%,50% 110%,-10% 110%)
+
+.slick-next
+  right: 3vw
+  clip-path: polygon(50% -10%,110% -10%,110% 110%,50% 110%)
