@@ -174,6 +174,7 @@ class Site {
           _this.scrollOffset = _this.$window.scrollTop();
           _this.$mainContainer.css('top', '-' + _this.scrollOffset + 'px');
 
+          // go to slide of image clicked on
           _this.$slickCarousel.slick('slickGoTo', index, true);
 
           _this.$body.addClass('carousel-active');
