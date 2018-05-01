@@ -17,11 +17,24 @@ html, body
   width: 150px
   transform: rotate(-10deg)
 
+.dot
+  background-color: $color-black
+
 #postit-dot
   position: absolute
   top: -10px
   left: 45%
-  background-color: $color-black
+
+.hover-dot
+  .dot
+    position: absolute
+    top: 50%
+    left: 50%
+    visibility: hidden
+    pointer-events: none
+  &.show-dot
+    .dot
+      visibility: visible
 
 // ******************************************************
 
@@ -34,10 +47,12 @@ html, body
 
 // FRONT PAGE
 
-.frontpage-section-label
+.frontpage-section-label,
+.exhibitions-section-label
   width: 100%
   border-bottom: $border-style
   padding-bottom: $margin-tiny
+  text-transform: uppercase
 
 // ******************************************************
 

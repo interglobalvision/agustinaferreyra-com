@@ -60,11 +60,339 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+(function (global, factory) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if (true) {
+    // AMD - RequireJS
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) == 'object' && module.exports) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+})(typeof window != 'undefined' ? window : undefined, function () {
+
+  "use strict";
+
+  function EvEmitter() {}
+
+  var proto = EvEmitter.prototype;
+
+  proto.on = function (eventName, listener) {
+    if (!eventName || !listener) {
+      return;
+    }
+    // set events hash
+    var events = this._events = this._events || {};
+    // set listeners array
+    var listeners = events[eventName] = events[eventName] || [];
+    // only add once
+    if (listeners.indexOf(listener) == -1) {
+      listeners.push(listener);
+    }
+
+    return this;
+  };
+
+  proto.once = function (eventName, listener) {
+    if (!eventName || !listener) {
+      return;
+    }
+    // add event
+    this.on(eventName, listener);
+    // set once flag
+    // set onceEvents hash
+    var onceEvents = this._onceEvents = this._onceEvents || {};
+    // set onceListeners object
+    var onceListeners = onceEvents[eventName] = onceEvents[eventName] || {};
+    // set flag
+    onceListeners[listener] = true;
+
+    return this;
+  };
+
+  proto.off = function (eventName, listener) {
+    var listeners = this._events && this._events[eventName];
+    if (!listeners || !listeners.length) {
+      return;
+    }
+    var index = listeners.indexOf(listener);
+    if (index != -1) {
+      listeners.splice(index, 1);
+    }
+
+    return this;
+  };
+
+  proto.emitEvent = function (eventName, args) {
+    var listeners = this._events && this._events[eventName];
+    if (!listeners || !listeners.length) {
+      return;
+    }
+    // copy over to avoid interference if .off() in listener
+    listeners = listeners.slice(0);
+    args = args || [];
+    // once stuff
+    var onceListeners = this._onceEvents && this._onceEvents[eventName];
+
+    for (var i = 0; i < listeners.length; i++) {
+      var listener = listeners[i];
+      var isOnce = onceListeners && onceListeners[listener];
+      if (isOnce) {
+        // remove listener
+        // remove before trigger to prevent recursion
+        this.off(eventName, listener);
+        // unset once flag
+        delete onceListeners[listener];
+      }
+      // trigger listener
+      listener.apply(this, args);
+    }
+
+    return this;
+  };
+
+  proto.allOff = function () {
+    delete this._events;
+    delete this._onceEvents;
+  };
+
+  return EvEmitter;
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*!
+ * getSize v2.0.3
+ * measure size of elements
+ * MIT license
+ */
+
+/* jshint browser: true, strict: true, undef: true, unused: true */
+/* globals console: false */
+
+(function (window, factory) {
+  /* jshint strict: false */ /* globals define, module */
+  if (true) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) == 'object' && module.exports) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // browser global
+    window.getSize = factory();
+  }
+})(window, function factory() {
+  'use strict';
+
+  // -------------------------- helpers -------------------------- //
+
+  // get a number from a string, not a percentage
+
+  function getStyleSize(value) {
+    var num = parseFloat(value);
+    // not a percent like '100%', and a number
+    var isValid = value.indexOf('%') == -1 && !isNaN(num);
+    return isValid && num;
+  }
+
+  function noop() {}
+
+  var logError = typeof console == 'undefined' ? noop : function (message) {
+    console.error(message);
+  };
+
+  // -------------------------- measurements -------------------------- //
+
+  var measurements = ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom', 'marginLeft', 'marginRight', 'marginTop', 'marginBottom', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth', 'borderBottomWidth'];
+
+  var measurementsLength = measurements.length;
+
+  function getZeroSize() {
+    var size = {
+      width: 0,
+      height: 0,
+      innerWidth: 0,
+      innerHeight: 0,
+      outerWidth: 0,
+      outerHeight: 0
+    };
+    for (var i = 0; i < measurementsLength; i++) {
+      var measurement = measurements[i];
+      size[measurement] = 0;
+    }
+    return size;
+  }
+
+  // -------------------------- getStyle -------------------------- //
+
+  /**
+   * getStyle, get style of element, check for Firefox bug
+   * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+   */
+  function getStyle(elem) {
+    var style = getComputedStyle(elem);
+    if (!style) {
+      logError('Style returned ' + style + '. Are you running this code in a hidden iframe on Firefox? ' + 'See https://bit.ly/getsizebug1');
+    }
+    return style;
+  }
+
+  // -------------------------- setup -------------------------- //
+
+  var isSetup = false;
+
+  var isBoxSizeOuter;
+
+  /**
+   * setup
+   * check isBoxSizerOuter
+   * do on first getSize() rather than on page load for Firefox bug
+   */
+  function setup() {
+    // setup once
+    if (isSetup) {
+      return;
+    }
+    isSetup = true;
+
+    // -------------------------- box sizing -------------------------- //
+
+    /**
+     * Chrome & Safari measure the outer-width on style.width on border-box elems
+     * IE11 & Firefox<29 measures the inner-width
+     */
+    var div = document.createElement('div');
+    div.style.width = '200px';
+    div.style.padding = '1px 2px 3px 4px';
+    div.style.borderStyle = 'solid';
+    div.style.borderWidth = '1px 2px 3px 4px';
+    div.style.boxSizing = 'border-box';
+
+    var body = document.body || document.documentElement;
+    body.appendChild(div);
+    var style = getStyle(div);
+    // round value for browser zoom. desandro/masonry#928
+    isBoxSizeOuter = Math.round(getStyleSize(style.width)) == 200;
+    getSize.isBoxSizeOuter = isBoxSizeOuter;
+
+    body.removeChild(div);
+  }
+
+  // -------------------------- getSize -------------------------- //
+
+  function getSize(elem) {
+    setup();
+
+    // use querySeletor if elem is string
+    if (typeof elem == 'string') {
+      elem = document.querySelector(elem);
+    }
+
+    // do not proceed on non-objects
+    if (!elem || (typeof elem === 'undefined' ? 'undefined' : _typeof(elem)) != 'object' || !elem.nodeType) {
+      return;
+    }
+
+    var style = getStyle(elem);
+
+    // if hidden, everything is 0
+    if (style.display == 'none') {
+      return getZeroSize();
+    }
+
+    var size = {};
+    size.width = elem.offsetWidth;
+    size.height = elem.offsetHeight;
+
+    var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
+
+    // get all measurements
+    for (var i = 0; i < measurementsLength; i++) {
+      var measurement = measurements[i];
+      var value = style[measurement];
+      var num = parseFloat(value);
+      // any 'auto', 'medium' value will be 0
+      size[measurement] = !isNaN(num) ? num : 0;
+    }
+
+    var paddingWidth = size.paddingLeft + size.paddingRight;
+    var paddingHeight = size.paddingTop + size.paddingBottom;
+    var marginWidth = size.marginLeft + size.marginRight;
+    var marginHeight = size.marginTop + size.marginBottom;
+    var borderWidth = size.borderLeftWidth + size.borderRightWidth;
+    var borderHeight = size.borderTopWidth + size.borderBottomWidth;
+
+    var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
+
+    // overwrite width and height if we can get it from style
+    var styleWidth = getStyleSize(style.width);
+    if (styleWidth !== false) {
+      size.width = styleWidth + (
+      // add padding and border unless it's already including it
+      isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth);
+    }
+
+    var styleHeight = getStyleSize(style.height);
+    if (styleHeight !== false) {
+      size.height = styleHeight + (
+      // add padding and border unless it's already including it
+      isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight);
+    }
+
+    size.innerWidth = size.width - (paddingWidth + borderWidth);
+    size.innerHeight = size.height - (paddingHeight + borderHeight);
+
+    size.outerWidth = size.width + marginWidth;
+    size.outerHeight = size.height + marginHeight;
+
+    return size;
+  }
+
+  return getSize;
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79,23 +407,23 @@ var _createClass = function () { function defineProperties(target, props) { for 
 // Import style
 
 
-var _lazysizes = __webpack_require__(1);
+var _lazysizes = __webpack_require__(3);
 
 var _lazysizes2 = _interopRequireDefault(_lazysizes);
 
-var _masonryLayout = __webpack_require__(10);
+var _masonryLayout = __webpack_require__(5);
 
 var _masonryLayout2 = _interopRequireDefault(_masonryLayout);
 
-var _imagesloaded = __webpack_require__(15);
+var _imagesloaded = __webpack_require__(10);
 
 var _imagesloaded2 = _interopRequireDefault(_imagesloaded);
 
-var _slickCarousel = __webpack_require__(16);
+var _slickCarousel = __webpack_require__(11);
 
 var _slickCarousel2 = _interopRequireDefault(_slickCarousel);
 
-__webpack_require__(3);
+__webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -139,8 +467,15 @@ var Site = function () {
       this.$masonryHolder = $('.masonry-holder');
       this.$slickCarousel = $('.slick-carousel');
 
+      this.$hoverDotItem = $('.hover-dot');
+      this.$hoverDot = $('.hover-dot .dot');
+      this.$logoDot = $('svg#logo path.logo-dot');
+      this.$postitDot = $('#postit-dot');
+
       this.dotSize();
       this.positionPostit();
+      this.bindHoverDots();
+
       this.initMasonry();
       this.initCarousel();
     }
@@ -157,12 +492,11 @@ var Site = function () {
   }, {
     key: 'dotSize',
     value: function dotSize() {
-      var $dot = $('svg path.logo-dot');
       var _this = this;
 
-      if ($dot.length) {
+      if (_this.$logoDot.length) {
         // get dot diameter of first dot in logo svg
-        _this.dotDiameter = $dot.first().width();
+        _this.dotDiameter = _this.$logoDot.first().width();
       }
 
       // resize all dots to match dots in logo svg
@@ -171,8 +505,6 @@ var Site = function () {
         'width': _this.dotDiameter,
         'border-radius': _this.dotDiameter
       });
-
-      this.stylePostitDot();
     }
   }, {
     key: 'positionPostit',
@@ -197,19 +529,57 @@ var Site = function () {
           'left': randomLeft + 'vw',
           'transform': 'rotate(' + randomRotate + 'deg)'
         });
+
+        this.positionPostitDot();
       }
     }
   }, {
-    key: 'stylePostitDot',
-    value: function stylePostitDot() {
+    key: 'positionPostitDot',
+    value: function positionPostitDot() {
       var _this = this;
 
       if (_this.$postit.length) {
         // position post-it dot halfway off the top of post-it image
-        $('#postit-dot').css({
+        _this.$postitDot.css({
           'top': '-' + _this.dotDiameter / 2 + 'px'
         });
       }
+    }
+  }, {
+    key: 'bindHoverDots',
+    value: function bindHoverDots() {
+      var _this = this;
+
+      if (_this.$hoverDotItem.length) {
+
+        _this.positionHoverDots();
+
+        _this.$hoverDotItem.on({
+          mouseenter: function mouseenter() {
+            $(this).addClass('show-dot');
+          },
+          mouseleave: function mouseleave() {
+            $(this).removeClass('show-dot');
+          }
+        });
+      }
+    }
+  }, {
+    key: 'positionHoverDots',
+    value: function positionHoverDots() {
+      var _this = this;
+
+      var offset = _this.dotDiameter + 10;
+
+      _this.$hoverDot.each(function () {
+        var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
+        var randomLeft = _this.randomInt(100 - offset, offset);
+
+        $(this).css({
+          'top': randomTop + '%',
+          'left': randomLeft + '%'
+        });
+      });
     }
   }, {
     key: 'initMasonry',
@@ -327,7 +697,7 @@ var Site = function () {
 new Site();
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1024,10 +1394,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return lazysizes;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1057,345 +1427,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * EvEmitter v1.1.0
- * Lil' event emitter
- * MIT License
- */
-
-/* jshint unused: true, undef: true, strict: true */
-
-(function (global, factory) {
-  // universal module definition
-  /* jshint strict: false */ /* globals define, module, window */
-  if (true) {
-    // AMD - RequireJS
-    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) == 'object' && module.exports) {
-    // CommonJS - Browserify, Webpack
-    module.exports = factory();
-  } else {
-    // Browser globals
-    global.EvEmitter = factory();
-  }
-})(typeof window != 'undefined' ? window : undefined, function () {
-
-  "use strict";
-
-  function EvEmitter() {}
-
-  var proto = EvEmitter.prototype;
-
-  proto.on = function (eventName, listener) {
-    if (!eventName || !listener) {
-      return;
-    }
-    // set events hash
-    var events = this._events = this._events || {};
-    // set listeners array
-    var listeners = events[eventName] = events[eventName] || [];
-    // only add once
-    if (listeners.indexOf(listener) == -1) {
-      listeners.push(listener);
-    }
-
-    return this;
-  };
-
-  proto.once = function (eventName, listener) {
-    if (!eventName || !listener) {
-      return;
-    }
-    // add event
-    this.on(eventName, listener);
-    // set once flag
-    // set onceEvents hash
-    var onceEvents = this._onceEvents = this._onceEvents || {};
-    // set onceListeners object
-    var onceListeners = onceEvents[eventName] = onceEvents[eventName] || {};
-    // set flag
-    onceListeners[listener] = true;
-
-    return this;
-  };
-
-  proto.off = function (eventName, listener) {
-    var listeners = this._events && this._events[eventName];
-    if (!listeners || !listeners.length) {
-      return;
-    }
-    var index = listeners.indexOf(listener);
-    if (index != -1) {
-      listeners.splice(index, 1);
-    }
-
-    return this;
-  };
-
-  proto.emitEvent = function (eventName, args) {
-    var listeners = this._events && this._events[eventName];
-    if (!listeners || !listeners.length) {
-      return;
-    }
-    // copy over to avoid interference if .off() in listener
-    listeners = listeners.slice(0);
-    args = args || [];
-    // once stuff
-    var onceListeners = this._onceEvents && this._onceEvents[eventName];
-
-    for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
-      var isOnce = onceListeners && onceListeners[listener];
-      if (isOnce) {
-        // remove listener
-        // remove before trigger to prevent recursion
-        this.off(eventName, listener);
-        // unset once flag
-        delete onceListeners[listener];
-      }
-      // trigger listener
-      listener.apply(this, args);
-    }
-
-    return this;
-  };
-
-  proto.allOff = function () {
-    delete this._events;
-    delete this._onceEvents;
-  };
-
-  return EvEmitter;
-});
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*!
- * getSize v2.0.3
- * measure size of elements
- * MIT license
- */
-
-/* jshint browser: true, strict: true, undef: true, unused: true */
-/* globals console: false */
-
-(function (window, factory) {
-  /* jshint strict: false */ /* globals define, module */
-  if (true) {
-    // AMD
-    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) == 'object' && module.exports) {
-    // CommonJS
-    module.exports = factory();
-  } else {
-    // browser global
-    window.getSize = factory();
-  }
-})(window, function factory() {
-  'use strict';
-
-  // -------------------------- helpers -------------------------- //
-
-  // get a number from a string, not a percentage
-
-  function getStyleSize(value) {
-    var num = parseFloat(value);
-    // not a percent like '100%', and a number
-    var isValid = value.indexOf('%') == -1 && !isNaN(num);
-    return isValid && num;
-  }
-
-  function noop() {}
-
-  var logError = typeof console == 'undefined' ? noop : function (message) {
-    console.error(message);
-  };
-
-  // -------------------------- measurements -------------------------- //
-
-  var measurements = ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom', 'marginLeft', 'marginRight', 'marginTop', 'marginBottom', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth', 'borderBottomWidth'];
-
-  var measurementsLength = measurements.length;
-
-  function getZeroSize() {
-    var size = {
-      width: 0,
-      height: 0,
-      innerWidth: 0,
-      innerHeight: 0,
-      outerWidth: 0,
-      outerHeight: 0
-    };
-    for (var i = 0; i < measurementsLength; i++) {
-      var measurement = measurements[i];
-      size[measurement] = 0;
-    }
-    return size;
-  }
-
-  // -------------------------- getStyle -------------------------- //
-
-  /**
-   * getStyle, get style of element, check for Firefox bug
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
-   */
-  function getStyle(elem) {
-    var style = getComputedStyle(elem);
-    if (!style) {
-      logError('Style returned ' + style + '. Are you running this code in a hidden iframe on Firefox? ' + 'See https://bit.ly/getsizebug1');
-    }
-    return style;
-  }
-
-  // -------------------------- setup -------------------------- //
-
-  var isSetup = false;
-
-  var isBoxSizeOuter;
-
-  /**
-   * setup
-   * check isBoxSizerOuter
-   * do on first getSize() rather than on page load for Firefox bug
-   */
-  function setup() {
-    // setup once
-    if (isSetup) {
-      return;
-    }
-    isSetup = true;
-
-    // -------------------------- box sizing -------------------------- //
-
-    /**
-     * Chrome & Safari measure the outer-width on style.width on border-box elems
-     * IE11 & Firefox<29 measures the inner-width
-     */
-    var div = document.createElement('div');
-    div.style.width = '200px';
-    div.style.padding = '1px 2px 3px 4px';
-    div.style.borderStyle = 'solid';
-    div.style.borderWidth = '1px 2px 3px 4px';
-    div.style.boxSizing = 'border-box';
-
-    var body = document.body || document.documentElement;
-    body.appendChild(div);
-    var style = getStyle(div);
-    // round value for browser zoom. desandro/masonry#928
-    isBoxSizeOuter = Math.round(getStyleSize(style.width)) == 200;
-    getSize.isBoxSizeOuter = isBoxSizeOuter;
-
-    body.removeChild(div);
-  }
-
-  // -------------------------- getSize -------------------------- //
-
-  function getSize(elem) {
-    setup();
-
-    // use querySeletor if elem is string
-    if (typeof elem == 'string') {
-      elem = document.querySelector(elem);
-    }
-
-    // do not proceed on non-objects
-    if (!elem || (typeof elem === 'undefined' ? 'undefined' : _typeof(elem)) != 'object' || !elem.nodeType) {
-      return;
-    }
-
-    var style = getStyle(elem);
-
-    // if hidden, everything is 0
-    if (style.display == 'none') {
-      return getZeroSize();
-    }
-
-    var size = {};
-    size.width = elem.offsetWidth;
-    size.height = elem.offsetHeight;
-
-    var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
-
-    // get all measurements
-    for (var i = 0; i < measurementsLength; i++) {
-      var measurement = measurements[i];
-      var value = style[measurement];
-      var num = parseFloat(value);
-      // any 'auto', 'medium' value will be 0
-      size[measurement] = !isNaN(num) ? num : 0;
-    }
-
-    var paddingWidth = size.paddingLeft + size.paddingRight;
-    var paddingHeight = size.paddingTop + size.paddingBottom;
-    var marginWidth = size.marginLeft + size.marginRight;
-    var marginHeight = size.marginTop + size.marginBottom;
-    var borderWidth = size.borderLeftWidth + size.borderRightWidth;
-    var borderHeight = size.borderTopWidth + size.borderBottomWidth;
-
-    var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
-
-    // overwrite width and height if we can get it from style
-    var styleWidth = getStyleSize(style.width);
-    if (styleWidth !== false) {
-      size.width = styleWidth + (
-      // add padding and border unless it's already including it
-      isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth);
-    }
-
-    var styleHeight = getStyleSize(style.height);
-    if (styleHeight !== false) {
-      size.height = styleHeight + (
-      // add padding and border unless it's already including it
-      isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight);
-    }
-
-    size.innerWidth = size.width - (paddingWidth + borderWidth);
-    size.innerHeight = size.height - (paddingHeight + borderHeight);
-
-    size.outerWidth = size.width + marginWidth;
-    size.outerHeight = size.height + marginHeight;
-
-    return size;
-  }
-
-  return getSize;
-});
-
-/***/ }),
-/* 10 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1416,7 +1448,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /* jshint strict: false */ /*globals define, module, require */
   if (true) {
     // AMD
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(6), __webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -1634,7 +1666,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 11 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1655,7 +1687,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   if (true) {
     // AMD - RequireJS
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(12), __webpack_require__(14)], __WEBPACK_AMD_DEFINE_RESULT__ = function (EvEmitter, getSize, utils, Item) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0), __webpack_require__(1), __webpack_require__(7), __webpack_require__(9)], __WEBPACK_AMD_DEFINE_RESULT__ = function (EvEmitter, getSize, utils, Item) {
       return factory(window, EvEmitter, getSize, utils, Item);
     }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -2553,7 +2585,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 12 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2574,7 +2606,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   if (true) {
     // AMD
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(13)], __WEBPACK_AMD_DEFINE_RESULT__ = function (matchesSelector) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8)], __WEBPACK_AMD_DEFINE_RESULT__ = function (matchesSelector) {
       return factory(window, matchesSelector);
     }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -2791,7 +2823,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 13 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2857,7 +2889,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 14 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2874,7 +2906,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /* jshint strict: false */ /* globals define, module, require */
   if (true) {
     // AMD - RequireJS
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8), __webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0), __webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -3406,7 +3438,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 15 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3428,7 +3460,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   if (true) {
     // AMD
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8)], __WEBPACK_AMD_DEFINE_RESULT__ = function (EvEmitter) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_RESULT__ = function (EvEmitter) {
       return factory(window, EvEmitter);
     }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -3785,7 +3817,7 @@ function factory(window, EvEmitter) {
 });
 
 /***/ }),
-/* 16 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3814,7 +3846,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     'use strict';
 
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(17)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(12)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -6551,10 +6583,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 17 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = jQuery;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

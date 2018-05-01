@@ -44,8 +44,15 @@ class Site {
     this.$masonryHolder = $('.masonry-holder');
     this.$slickCarousel = $('.slick-carousel');
 
+    this.$hoverDotItem = $('.hover-dot');
+    this.$hoverDot = $('.hover-dot .dot');
+    this.$logoDot = $('svg#logo path.logo-dot');
+    this.$postitDot = $('#postit-dot');
+
     this.dotSize();
     this.positionPostit();
+    this.bindHoverDots();
+
     this.initMasonry();
     this.initCarousel();
   }
@@ -60,12 +67,11 @@ class Site {
   }
 
   dotSize() {
-    var $dot = $('svg path.logo-dot');
     var _this = this;
 
-    if ($dot.length) {
+    if (_this.$logoDot.length) {
       // get dot diameter of first dot in logo svg
-      _this.dotDiameter = $dot.first().width();
+      _this.dotDiameter = _this.$logoDot.first().width();
     }
 
     // resize all dots to match dots in logo svg
@@ -74,8 +80,6 @@ class Site {
       'width': _this.dotDiameter,
       'border-radius': _this.dotDiameter,
     });
-
-    this.stylePostitDot();
   }
 
   positionPostit() {
@@ -99,18 +103,54 @@ class Site {
         'left': randomLeft + 'vw',
         'transform': 'rotate(' + randomRotate + 'deg)',
       });
+
+      this.positionPostitDot();
     }
   }
 
-  stylePostitDot() {
+  positionPostitDot() {
     var _this = this;
 
     if (_this.$postit.length) {
       // position post-it dot halfway off the top of post-it image
-      $('#postit-dot').css({
+      _this.$postitDot.css({
         'top': '-' + (_this.dotDiameter / 2) + 'px',
       });
     }
+  }
+
+  bindHoverDots() {
+    var _this = this;
+
+    if (_this.$hoverDotItem.length) {
+
+      _this.positionHoverDots();
+
+      _this.$hoverDotItem.on({
+        mouseenter: function(){
+          $(this).addClass('show-dot');
+        },
+        mouseleave: function(){
+          $(this).removeClass('show-dot');
+        },
+      });
+    }
+  }
+
+  positionHoverDots() {
+    var _this = this;
+
+    var offset = _this.dotDiameter + 10;
+
+    _this.$hoverDot.each(function() {
+      var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
+      var randomLeft = _this.randomInt(100 - offset, offset);
+
+      $(this).css({
+        'top': randomTop + '%',
+        'left': randomLeft + '%',
+      });
+    });
   }
 
   initMasonry() {
