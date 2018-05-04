@@ -6,6 +6,7 @@ import lazySizes from 'lazysizes';
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 import slick from 'slick-carousel';
+import debounce from 'debounce';
 
 // Import style
 import '../styl/site.styl';
@@ -14,7 +15,9 @@ class Site {
   constructor() {
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window).resize(
+      debounce(this.onResize.bind(this), 200)
+    );
 
     $(document).ready(this.onReady.bind(this));
 
@@ -332,7 +335,7 @@ class Site {
 
 new Site();
 
-$.easing['jswing'] = $.easing['swing'];
+$.easing.jswing = $.easing.swing;
 
 $.extend( $.easing,
 {
