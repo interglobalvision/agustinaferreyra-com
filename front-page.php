@@ -18,7 +18,7 @@ get_header();
 <main id="main-content">
   <section id="posts">
     <div class="container">
-      <div class="grid-row">
+      <div class="grid-row flex-nowrap">
         <div id="logo-holder" class="grid-item align-self-end flex-grow">
           <?php get_template_part('partials/logo'); ?>
         </div>
