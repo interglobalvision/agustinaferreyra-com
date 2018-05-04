@@ -21,43 +21,55 @@ class Site {
   }
 
   onResize() {
-    this.windowHeight = $(window).height();
-    this.windowWidth = $(window).width();
+    this.windowHeight = this.$window.height();
+    this.windowWidth = this.$window.width();
 
     this.dotSize();
     this.positionPostit();
     this.sizeLogoHolder();
     this.layoutMasonry();
+    this.repositionFallenLogoDots();
   }
 
   onReady() {
     lazySizes.init();
 
-    this.windowHeight = $(window).height();
-    this.windowWidth = $(window).width();
+    this.$window = $(window);
+
+    this.windowHeight = this.$window.height();
+    this.windowWidth = this.$window.width();
     this.dotDiameter = 15;
+    this.dotRatio = 30.25;
     this.masonryImagesLoaded = false;
 
-    this.$window = $(window);
     this.$body = $('body');
     this.$mainContainer = $('#main-container');
     this.$postit = $('#postit');
     this.$masonryHolder = $('.masonry-holder');
     this.$slickCarousel = $('.slick-carousel');
-
+    this.$footer = $('#footer');
     this.$hoverDotItem = $('.hover-dot');
     this.$hoverDot = $('.hover-dot .dot');
-    this.$logoDot = $('svg#logo path.logo-dot');
+    this.$logoDot = $('#logo-holder .logo-dot');
     this.$postitDot = $('#postit-dot');
     this.$logoHolder = $('#logo-holder');
-    this.$logo = $('#logo-holder .logo');
+    this.$logo = $('#logo-holder #logo');
+
+    let logoDots = [];
+    this.$logoDot.each(function() {
+      logoDots.push({
+        ref: $(this),
+        hasFallen: false
+      });
+    });
+    this.logoDots = logoDots;
 
     this.dotSize();
     this.positionPostit();
     this.bindHoverDots();
-    this.sizeLogoHolder();
     this.initMasonry();
     this.initCarousel();
+    this.sizeLogoHolder();
   }
 
   fixWidows() {
@@ -173,10 +185,13 @@ class Site {
         _this.masonryInstance.on('layoutComplete', function() {
           // show masonry container after layout
           _this.$masonryHolder.removeClass('hidden');
+          _this.bindDotDrop();
         });
 
         _this.layoutMasonry();
       });
+    } else {
+      _this.bindDotDrop();
     }
   }
 
@@ -268,6 +283,72 @@ class Site {
       this.bindCarouselToggles();
     }
   }
+
+  bindDotDrop() {
+    var _this = this;
+
+    _this.$window.on('scroll', function() {
+      let scrollTop = _this.$window.scrollTop();
+      let footerTop = _this.$footer.offset().top;
+
+      $.each(_this.logoDots, function(index, value) {
+        let startOffset = value.ref.offset().top;
+        let distance = footerTop - startOffset - _this.dotDiameter;
+
+        if (startOffset <= scrollTop && !value.hasFallen) {
+          _this.animateDotDrop(value.ref, distance);
+          _this.logoDots[index].hasFallen = true;
+        }
+      });
+    });
+  }
+
+  animateDotDrop($dot, distance) {
+    $dot.animate({  textIndent: distance }, {
+      step: function(now,fx) {
+        $(this).css('transform','translateY('+now+'px)');
+      },
+      duration: distance,
+    },'easeOutBounce');
+  }
+
+  repositionFallenLogoDots() {
+    let _this = this;
+
+    let footerTop = _this.$footer.offset().top;
+
+    $.each(_this.logoDots, function(index, value) {
+      if (value.hasFallen) {
+        value.ref.css('transform', 'translateY(0)');
+
+        let startOffset = value.ref.offset().top;
+        let distance = footerTop - startOffset - _this.dotDiameter;
+
+        value.ref.css('transform', 'translateY(' + distance + 'px)');
+      }
+    });
+  }
 }
 
 new Site();
+
+$.easing['jswing'] = $.easing['swing'];
+
+$.extend( $.easing,
+{
+  def: 'easeOutBounce',
+  swing: function (x, t, b, c, d) {
+    return $.easing[$.easing.def](x, t, b, c, d);
+  },
+  easeOutBounce: function (x, t, b, c, d) {
+    if ((t/=d) < (1/2.75)) {
+      return c*(7.5625*t*t) + b;
+    } else if (t < (2/2.75)) {
+      return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
+    } else if (t < (2.5/2.75)) {
+      return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
+    } else {
+      return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+    }
+  }
+});

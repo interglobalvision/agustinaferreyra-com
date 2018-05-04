@@ -443,44 +443,56 @@ var Site = function () {
   _createClass(Site, [{
     key: 'onResize',
     value: function onResize() {
-      this.windowHeight = $(window).height();
-      this.windowWidth = $(window).width();
+      this.windowHeight = this.$window.height();
+      this.windowWidth = this.$window.width();
 
       this.dotSize();
       this.positionPostit();
       this.sizeLogoHolder();
       this.layoutMasonry();
+      this.repositionFallenLogoDots();
     }
   }, {
     key: 'onReady',
     value: function onReady() {
       _lazysizes2.default.init();
 
-      this.windowHeight = $(window).height();
-      this.windowWidth = $(window).width();
+      this.$window = $(window);
+
+      this.windowHeight = this.$window.height();
+      this.windowWidth = this.$window.width();
       this.dotDiameter = 15;
+      this.dotRatio = 30.25;
       this.masonryImagesLoaded = false;
 
-      this.$window = $(window);
       this.$body = $('body');
       this.$mainContainer = $('#main-container');
       this.$postit = $('#postit');
       this.$masonryHolder = $('.masonry-holder');
       this.$slickCarousel = $('.slick-carousel');
-
+      this.$footer = $('#footer');
       this.$hoverDotItem = $('.hover-dot');
       this.$hoverDot = $('.hover-dot .dot');
-      this.$logoDot = $('svg#logo path.logo-dot');
+      this.$logoDot = $('#logo-holder .logo-dot');
       this.$postitDot = $('#postit-dot');
       this.$logoHolder = $('#logo-holder');
-      this.$logo = $('#logo-holder .logo');
+      this.$logo = $('#logo-holder #logo');
+
+      var logoDots = [];
+      this.$logoDot.each(function () {
+        logoDots.push({
+          ref: $(this),
+          hasFallen: false
+        });
+      });
+      this.logoDots = logoDots;
 
       this.dotSize();
       this.positionPostit();
       this.bindHoverDots();
-      this.sizeLogoHolder();
       this.initMasonry();
       this.initCarousel();
+      this.sizeLogoHolder();
     }
   }, {
     key: 'fixWidows',
@@ -603,10 +615,13 @@ var Site = function () {
           _this.masonryInstance.on('layoutComplete', function () {
             // show masonry container after layout
             _this.$masonryHolder.removeClass('hidden');
+            _this.bindDotDrop();
           });
 
           _this.layoutMasonry();
         });
+      } else {
+        _this.bindDotDrop();
       }
     }
   }, {
@@ -705,12 +720,80 @@ var Site = function () {
         this.bindCarouselToggles();
       }
     }
+  }, {
+    key: 'bindDotDrop',
+    value: function bindDotDrop() {
+      var _this = this;
+
+      _this.$window.on('scroll', function () {
+        var scrollTop = _this.$window.scrollTop();
+        var footerTop = _this.$footer.offset().top;
+
+        $.each(_this.logoDots, function (index, value) {
+          var startOffset = value.ref.offset().top;
+          var distance = footerTop - startOffset - _this.dotDiameter;
+
+          if (startOffset <= scrollTop && !value.hasFallen) {
+            _this.animateDotDrop(value.ref, distance);
+            _this.logoDots[index].hasFallen = true;
+          }
+        });
+      });
+    }
+  }, {
+    key: 'animateDotDrop',
+    value: function animateDotDrop($dot, distance) {
+      $dot.animate({ textIndent: distance }, {
+        step: function step(now, fx) {
+          $(this).css('transform', 'translateY(' + now + 'px)');
+        },
+        duration: distance
+      }, 'easeOutBounce');
+    }
+  }, {
+    key: 'repositionFallenLogoDots',
+    value: function repositionFallenLogoDots() {
+      var _this = this;
+
+      var footerTop = _this.$footer.offset().top;
+
+      $.each(_this.logoDots, function (index, value) {
+        if (value.hasFallen) {
+          value.ref.css('transform', 'translateY(0)');
+
+          var startOffset = value.ref.offset().top;
+          var distance = footerTop - startOffset - _this.dotDiameter;
+
+          value.ref.css('transform', 'translateY(' + distance + 'px)');
+        }
+      });
+    }
   }]);
 
   return Site;
 }();
 
 new Site();
+
+$.easing['jswing'] = $.easing['swing'];
+
+$.extend($.easing, {
+  def: 'easeOutBounce',
+  swing: function swing(x, t, b, c, d) {
+    return $.easing[$.easing.def](x, t, b, c, d);
+  },
+  easeOutBounce: function easeOutBounce(x, t, b, c, d) {
+    if ((t /= d) < 1 / 2.75) {
+      return c * (7.5625 * t * t) + b;
+    } else if (t < 2 / 2.75) {
+      return c * (7.5625 * (t -= 1.5 / 2.75) * t + 0.75) + b;
+    } else if (t < 2.5 / 2.75) {
+      return c * (7.5625 * (t -= 2.25 / 2.75) * t + 0.9375) + b;
+    } else {
+      return c * (7.5625 * (t -= 2.625 / 2.75) * t + 0.984375) + b;
+    }
+  }
+});
 
 /***/ }),
 /* 3 */
