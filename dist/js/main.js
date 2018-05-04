@@ -646,6 +646,9 @@ var Site = function () {
     value: function sizeLogoHolder() {
       var _this = this;
 
+      // calculate and apply top padding to logoholder
+      // to position it at ~bottom of viewport
+
       if (_this.$logoHolder.length) {
         var offset = _this.$logoHolder.offset().top;
         var logoHeight = _this.$logo.height();
@@ -749,6 +752,8 @@ var Site = function () {
     value: function animateDotDrop($dot, distance) {
       var _this = this;
 
+      // randomly offset bounce duration
+      // more realistic looking
       var durationOffset = _this.randomInt(500, -500);
 
       $dot.animate({ textIndent: distance }, {
@@ -762,6 +767,9 @@ var Site = function () {
     key: 'repositionFallenLogoDots',
     value: function repositionFallenLogoDots() {
       var _this = this;
+
+      // on resize: position dots that have
+      // already fallen onto footer
 
       var footerTop = _this.$footer.offset().top;
 

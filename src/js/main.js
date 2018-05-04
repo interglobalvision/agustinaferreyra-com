@@ -213,6 +213,9 @@ class Site {
   sizeLogoHolder() {
     var _this = this;
 
+    // calculate and apply top padding to logoholder
+    // to position it at ~bottom of viewport
+
     if (_this.$logoHolder.length) {
       var offset = _this.$logoHolder.offset().top;
       var logoHeight = _this.$logo.height();
@@ -309,6 +312,8 @@ class Site {
   animateDotDrop($dot, distance) {
     const _this = this;
 
+    // randomly offset bounce duration
+    // more realistic looking
     const durationOffset =  _this.randomInt(500, -500);
 
     $dot.animate({  textIndent: distance }, {
@@ -321,6 +326,9 @@ class Site {
 
   repositionFallenLogoDots() {
     let _this = this;
+
+    // on resize: position dots that have
+    // already fallen onto footer
 
     let footerTop = _this.$footer.offset().top;
 
