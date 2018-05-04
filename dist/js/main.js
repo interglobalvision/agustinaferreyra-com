@@ -423,11 +423,11 @@ var _slickCarousel = __webpack_require__(11);
 
 var _slickCarousel2 = _interopRequireDefault(_slickCarousel);
 
-var _debounce = __webpack_require__(19);
+var _debounce = __webpack_require__(13);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(13);
+__webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -747,11 +747,15 @@ var Site = function () {
   }, {
     key: 'animateDotDrop',
     value: function animateDotDrop($dot, distance) {
+      var _this = this;
+
+      var durationOffset = _this.randomInt(500, -500);
+
       $dot.animate({ textIndent: distance }, {
         step: function step(now, fx) {
           $(this).css('transform', 'translateY(' + now + 'px)');
         },
-        duration: distance
+        duration: distance + durationOffset
       }, 'easeOutBounce');
     }
   }, {
@@ -779,6 +783,7 @@ var Site = function () {
 
 new Site();
 
+// eastOutBounce easing
 $.easing.jswing = $.easing.swing;
 
 $.extend($.easing, {
@@ -6693,17 +6698,6 @@ module.exports = jQuery;
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6775,6 +6769,12 @@ module.exports = function debounce(func, wait, immediate) {
 
   return debounced;
 };
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

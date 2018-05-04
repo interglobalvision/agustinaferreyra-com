@@ -307,11 +307,15 @@ class Site {
   }
 
   animateDotDrop($dot, distance) {
+    const _this = this;
+
+    const durationOffset =  _this.randomInt(500, -500);
+
     $dot.animate({  textIndent: distance }, {
       step: function(now,fx) {
         $(this).css('transform','translateY('+now+'px)');
       },
-      duration: distance,
+      duration: distance + durationOffset,
     },'easeOutBounce');
   }
 
@@ -335,6 +339,8 @@ class Site {
 
 new Site();
 
+
+// eastOutBounce easing
 $.easing.jswing = $.easing.swing;
 
 $.extend( $.easing,
