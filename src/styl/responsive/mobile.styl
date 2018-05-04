@@ -23,7 +23,7 @@ html, body
 #postit-dot
   position: absolute
   top: -10px
-  left: 45%
+  left: 45% 
 
 .hover-dot
   .dot
@@ -38,6 +38,10 @@ html, body
 
 #logo-holder
   z-index: 900
+  width: 0
+  padding: 0
+  #logo
+    display: none
 
 #logo
   position: relative
@@ -103,13 +107,6 @@ html, body
 
 // HEADER
 
-#header
-  position: fixed
-  top: 0
-  left: 0
-  width: 100vw
-  z-index: 900
-
 #main-nav-list-row
   justify-content: space-between
 
@@ -136,6 +133,9 @@ html, body
   width: 50%
   padding: 0 $margin-small $margin-basic
   z-index: 0
+
+#logo-holder.masonry-item
+  width: 0
 
 // ******************************************************
 

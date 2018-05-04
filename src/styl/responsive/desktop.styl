@@ -1,13 +1,32 @@
-// ******************************************************
+@media screen and (min-width: 1366px)
 
-// HEADER
+  $gutter = 26px
 
-#logo
-  transform: translateY(-($margin-basic))
+  $margin-micro = ($gutter / 3)
+  $margin-tiny = ($gutter / 2)
+  $margin-small = ($gutter)
+  $margin-basic = ($gutter * 2)
+  $margin-mid = ($gutter * 3.5)
+  $margin-large = ($gutter * 7)
 
-// ******************************************************
+  grid-maker(96%, $gutter, xl)
 
-// MASONRY
+  space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-.masonry-item
-  padding: 0 $margin-tiny $margin-basic
+  // ******************************************************
+
+  // HEADER
+
+  #logo-holder
+    padding-left: $margin-tiny
+    padding-right: $margin-tiny
+
+  #logo
+    transform: translateY(-($margin-basic))
+
+  // ******************************************************
+
+  // MASONRY
+
+  .masonry-item
+    padding: 0 $margin-tiny $margin-basic

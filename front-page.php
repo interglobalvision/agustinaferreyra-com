@@ -15,14 +15,14 @@ get_header();
   }
 ?>
 
-<main id="main-content">
+<main id="main-content" class="margin-top-large padding-top-basic">
   <section id="posts">
     <div class="container">
       <div class="grid-row flex-nowrap">
         <div id="logo-holder" class="grid-item align-self-end flex-grow">
           <?php get_template_part('partials/logo'); ?>
         </div>
-        <div class="grid-item item-s-9 grid-row no-gutter align-self-start">
+        <div class="grid-item item-s-12 item-m-9 grid-row no-gutter align-self-start">
 <?php
 $now = time();
 
