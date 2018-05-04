@@ -19,7 +19,7 @@ get_header();
   <section id="posts">
     <div class="container">
       <div class="grid-row">
-        <div id="logo-holder" class="grid-item item-m-3 align-self-end">
+        <div id="logo-holder" class="grid-item align-self-end flex-grow">
           <?php get_template_part('partials/logo'); ?>
         </div>
         <div class="grid-item item-s-9 grid-row no-gutter align-self-start">
