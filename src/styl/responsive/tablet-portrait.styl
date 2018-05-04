@@ -1,27 +1,69 @@
+@media screen and (min-width: 720px)
 
-// ******************************************************
+  $gutter = 21px
 
-// HEADER
+  $margin-micro = ($gutter / 3)
+  $margin-tiny = ($gutter / 2)
+  $margin-small = ($gutter)
+  $margin-basic = ($gutter * 2)
+  $margin-mid = ($gutter * 3.5)
+  $margin-large = ($gutter * 7)
 
-#main-nav-list-row
-  justify-content: normal
+  $font-size-basic = 14px
 
-// ******************************************************
+  space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-// FRONT PAGE
+  grid-maker( v, $gutter, m)
 
-.frontpage-section-label-holder
-  border-right: $border-style
-  text-align: right
+  font-sizes($font-size-basic)
 
-.frontpage-section-label
-  display: inline-block
-  border-bottom: none
-  padding-bottom: 0
+  .mobile-only
+    display: none !important
 
-// ******************************************************
+  // HEADER
 
-// MASONRY
+  #header
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    z-index: 900
 
-.masonry-item
-  padding: 0 $margin-small $margin-basic
+  #main-nav-list-row
+    justify-content: normal
+
+  #logo
+    transform: translateY(-($margin-basic))
+
+  #logo-holder
+    width: auto
+    padding-left: $margin-tiny
+    padding-right: $margin-tiny
+    #logo
+      display: inline-block
+
+  #logo-holder-mobile
+    display: none
+
+  // ******************************************************
+
+  // FRONT PAGE
+
+  .frontpage-section-label-holder
+    border-right: $border-style
+    text-align: right
+
+  .frontpage-section-label
+    display: inline-block
+    border-bottom: none
+    padding-bottom: 0
+
+  // ******************************************************
+
+  // MASONRY
+
+  .masonry-item
+    padding: 0 $margin-tiny $margin-basic
+
+  #logo-holder.masonry-item
+    width: 50%

@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main id="main-content" class="margin-top-large padding-top-basic">
   <section id="posts">
     <div class="container">
 
@@ -23,7 +23,7 @@ if (have_posts()) {
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-6">
             <?php
-              echo !empty($start) ? '<div class="font-bold font-uppercase">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
+              echo !empty($start) ? '<div class="font-bold font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
             ?>
             <?php
               if (!empty($location)) {
@@ -39,13 +39,13 @@ if (have_posts()) {
             <?php
               if (!empty($artists)) {
                 foreach ($artists as $artist) {
-                  echo '<div class="font-bold font-uppercase">' . $artist->name . '</div>';
+                  echo '<div class="font-bold font-uppercase font-size-large">' . $artist->name . '</div>';
                 }
               }
             ?>
             <div class="grid-row justify-between align-items-end">
               <div class="grid-item no-gutter">
-                <?php echo !empty($title) ? '<h2 class="font-uppercase">' . $title . '</h2>' : ''; ?>
+                <?php echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : ''; ?>
               </div>
               <div class="grid-item no-gutter">
                 <?php echo !empty($pr_pdf) ? '<a href="' . $pr_pdf . '" class="link-underline">Press Release</a>' : ''; ?>
@@ -54,11 +54,18 @@ if (have_posts()) {
           </div>
         </div>
 
+        <div class="masonry-holder">
+          <div class="masonry-gutter"></div>
+
+          <div id="logo-holder" class="masonry-item">
+            <div>
+              <?php get_template_part('partials/logo'); ?>
+            </div>
+          </div>
+
         <?php
           if (!empty($images)) {
         ?>
-        <div class="masonry-holder">
-          <div class="masonry-gutter"></div>
           <?php
             $index = 0;
 

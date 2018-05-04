@@ -423,7 +423,11 @@ var _slickCarousel = __webpack_require__(11);
 
 var _slickCarousel2 = _interopRequireDefault(_slickCarousel);
 
-__webpack_require__(13);
+var _debounce = __webpack_require__(13);
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+__webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -435,7 +439,7 @@ var Site = function () {
 
     this.mobileThreshold = 601;
 
-    $(window).resize(this.onResize.bind(this));
+    $(window).resize((0, _debounce2.default)(this.onResize.bind(this), 200));
 
     $(document).ready(this.onReady.bind(this));
   }
@@ -443,41 +447,56 @@ var Site = function () {
   _createClass(Site, [{
     key: 'onResize',
     value: function onResize() {
-      this.$windowHeight = $(window).height();
-      this.$windowWidth = $(window).width();
+      this.windowHeight = this.$window.height();
+      this.windowWidth = this.$window.width();
 
       this.dotSize();
       this.positionPostit();
+      this.sizeLogoHolder();
       this.layoutMasonry();
+      this.repositionFallenLogoDots();
     }
   }, {
     key: 'onReady',
     value: function onReady() {
       _lazysizes2.default.init();
 
-      this.windowHeight = $(window).height();
-      this.windowWidth = $(window).width();
+      this.$window = $(window);
+
+      this.windowHeight = this.$window.height();
+      this.windowWidth = this.$window.width();
       this.dotDiameter = 15;
+      this.dotRatio = 30.25;
       this.masonryImagesLoaded = false;
 
-      this.$window = $(window);
       this.$body = $('body');
       this.$mainContainer = $('#main-container');
       this.$postit = $('#postit');
       this.$masonryHolder = $('.masonry-holder');
       this.$slickCarousel = $('.slick-carousel');
-
+      this.$footer = $('#footer');
       this.$hoverDotItem = $('.hover-dot');
       this.$hoverDot = $('.hover-dot .dot');
-      this.$logoDot = $('svg#logo path.logo-dot');
+      this.$logoDot = $('#logo-holder .logo-dot');
       this.$postitDot = $('#postit-dot');
+      this.$logoHolder = $('#logo-holder');
+      this.$logo = $('#logo-holder #logo');
+
+      var logoDots = [];
+      this.$logoDot.each(function () {
+        logoDots.push({
+          ref: $(this),
+          hasFallen: false
+        });
+      });
+      this.logoDots = logoDots;
 
       this.dotSize();
       this.positionPostit();
       this.bindHoverDots();
-
       this.initMasonry();
       this.initCarousel();
+      this.sizeLogoHolder();
     }
   }, {
     key: 'fixWidows',
@@ -600,10 +619,13 @@ var Site = function () {
           _this.masonryInstance.on('layoutComplete', function () {
             // show masonry container after layout
             _this.$masonryHolder.removeClass('hidden');
+            _this.bindDotDrop();
           });
 
           _this.layoutMasonry();
         });
+      } else {
+        _this.bindDotDrop();
       }
     }
   }, {
@@ -617,6 +639,22 @@ var Site = function () {
 
         // layout masonry items
         _this.masonryInstance.layout();
+      }
+    }
+  }, {
+    key: 'sizeLogoHolder',
+    value: function sizeLogoHolder() {
+      var _this = this;
+
+      // calculate and apply top padding to logoholder
+      // to position it at ~bottom of viewport
+
+      if (_this.$logoHolder.length) {
+        var offset = _this.$logoHolder.offset().top;
+        var logoHeight = _this.$logo.height();
+        var padding = _this.windowHeight - offset - logoHeight;
+
+        _this.$logoHolder.css('padding-top', padding + 'px');
       }
     }
   }, {
@@ -689,12 +727,90 @@ var Site = function () {
         this.bindCarouselToggles();
       }
     }
+  }, {
+    key: 'bindDotDrop',
+    value: function bindDotDrop() {
+      var _this = this;
+
+      _this.$window.on('scroll', function () {
+        var scrollTop = _this.$window.scrollTop();
+        var footerTop = _this.$footer.offset().top;
+
+        $.each(_this.logoDots, function (index, value) {
+          var startOffset = value.ref.offset().top;
+          var distance = footerTop - startOffset - _this.dotDiameter;
+
+          if (startOffset <= scrollTop && !value.hasFallen) {
+            _this.animateDotDrop(value.ref, distance);
+            _this.logoDots[index].hasFallen = true;
+          }
+        });
+      });
+    }
+  }, {
+    key: 'animateDotDrop',
+    value: function animateDotDrop($dot, distance) {
+      var _this = this;
+
+      // randomly offset bounce duration
+      // more realistic looking
+      var durationOffset = _this.randomInt(500, -500);
+
+      $dot.animate({ textIndent: distance }, {
+        step: function step(now, fx) {
+          $(this).css('transform', 'translateY(' + now + 'px)');
+        },
+        duration: distance + durationOffset
+      }, 'easeOutBounce');
+    }
+  }, {
+    key: 'repositionFallenLogoDots',
+    value: function repositionFallenLogoDots() {
+      var _this = this;
+
+      // on resize: position dots that have
+      // already fallen onto footer
+
+      var footerTop = _this.$footer.offset().top;
+
+      $.each(_this.logoDots, function (index, value) {
+        if (value.hasFallen) {
+          value.ref.css('transform', 'translateY(0)');
+
+          var startOffset = value.ref.offset().top;
+          var distance = footerTop - startOffset - _this.dotDiameter;
+
+          value.ref.css('transform', 'translateY(' + distance + 'px)');
+        }
+      });
+    }
   }]);
 
   return Site;
 }();
 
 new Site();
+
+// eastOutBounce easing
+$.easing.jswing = $.easing.swing;
+
+$.extend($.easing, {
+  def: 'easeOutBounce',
+  swing: function swing(x, t, b, c, d) {
+    return $.easing[$.easing.def](x, t, b, c, d);
+  },
+  easeOutBounce: function easeOutBounce(x, t, b, c, d) {
+    if ((t /= d) < 1 / 2.75) {
+      return c * (7.5625 * t * t) + b;
+    } else if (t < 2 / 2.75) {
+      return c * (7.5625 * (t -= 1.5 / 2.75) * t + 0.75) + b;
+    } else if (t < 2.5 / 2.75) {
+      return c * (7.5625 * (t -= 2.25 / 2.75) * t + 0.9375) + b;
+    } else {
+      return c * (7.5625 * (t -= 2.625 / 2.75) * t + 0.984375) + b;
+    }
+  }
+});
 
 /***/ }),
 /* 3 */
@@ -6590,6 +6706,80 @@ module.exports = jQuery;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing. The function also has a property 'clear' 
+ * that is a function which will clear the timer to prevent previously scheduled executions. 
+ *
+ * @source underscore.js
+ * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+ * @param {Function} function to wrap
+ * @param {Number} timeout in ms (`100`)
+ * @param {Boolean} whether to execute at the beginning (`false`)
+ * @api public
+ */
+
+module.exports = function debounce(func, wait, immediate) {
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
+
+  function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+    }
+  };
+
+  var debounced = function debounced() {
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
+    }
+
+    return result;
+  };
+
+  debounced.clear = function () {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  debounced.flush = function () {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+};
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

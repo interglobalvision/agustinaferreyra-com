@@ -5,7 +5,7 @@
   $email = $site_options['_igv_gallery_email'];
 ?>
 
-  <footer id="footer" class="padding-top-large">
+  <footer id="footer" class="margin-top-large">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6">
@@ -13,9 +13,9 @@
             <div class="font-uppercase font-bold">
               Galería Agustina Ferreyra
             </div>
-            <? echo !empty($hours) ? '<div class="margin-top-small">' . $hours . '</div>' : ''; ?>
-            <? echo !empty($address) ? '<div class="margin-top-small">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
-            <? echo !empty($email) ? '<div class="margin-top-small"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
+            <?php echo !empty($hours) ? '<div class="margin-top-small">' . $hours . '</div>' : ''; ?>
+            <?php echo !empty($address) ? '<div class="margin-top-small">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
+            <?php echo !empty($email) ? '<div class="margin-top-small"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
           </div>
         </div>
       </div>

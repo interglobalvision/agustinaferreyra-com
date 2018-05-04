@@ -40,6 +40,7 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "debounce": "^1.1.0",
     "imagesloaded": "^4.1.4",
     "masonry-layout": "^4.2.1",
     "slick-carousel": "^1.8.1"
