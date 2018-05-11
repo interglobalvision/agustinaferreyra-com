@@ -2,11 +2,11 @@
 get_header();
 ?>
 
-<main id="main-content" class="margin-top-large padding-top-basic">
+<main id="main-content" class="margin-top-large">
   <section id="posts">
     <div class="container">
       <div class="grid-row">
-        <div id="logo-holder" class="grid-item item-s-12 item-m-6 align-self-end flex-grow">
+        <div id="logo-holder" class="grid-item item-s-12 item-m-6">
           <?php get_template_part('partials/logo'); ?>
         </div>
         <div class="grid-item item-s-12 item-m-6 grid-row no-gutter align-self-start">
