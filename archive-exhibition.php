@@ -2,9 +2,14 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main id="main-content" class="margin-top-large">
   <section id="posts">
     <div class="container">
+      <div class="grid-row">
+        <div id="logo-holder" class="grid-item item-s-12 item-m-6">
+          <?php get_template_part('partials/logo'); ?>
+        </div>
+        <div class="grid-item item-s-12 item-m-6 grid-row no-gutter align-self-start">
 
 <?php
 $now = time();
@@ -32,11 +37,10 @@ $current_query = new WP_Query( $current_args );
 
 if ( $current_query->have_posts() ) {
 ?>
-      <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
-          <div class="exhibitions-section-label">Current</div>
-        </div>
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
+          <div class="grid-item item-s-12 exhibitions-section-label-holder">
+            <div class="exhibitions-section-label">Current</div>
+          </div>
+          <div class="grid-item item-s-12 grid-row no-gutter margin-bottom-basic">
 <?php
 	while ( $current_query->have_posts() ) {
 		$current_query->the_post();
@@ -44,8 +48,7 @@ if ( $current_query->have_posts() ) {
     get_template_part('partials/archive-exhibition-item');
   }
 ?>
-        </div>
-      </div>
+          </div>
 <?php
 }
 
@@ -68,11 +71,10 @@ $upcoming_query = new WP_Query( $upcoming_args );
 
 if ( $upcoming_query->have_posts() ) {
 ?>
-      <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
-          <div class="exhibitions-section-label">Upcoming</div>
-        </div>
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
+          <div class="grid-item item-s-12 exhibitions-section-label-holder">
+            <div class="exhibitions-section-label">Upcoming</div>
+          </div>
+          <div class="grid-item item-s-12 grid-row no-gutter margin-bottom-basic">
 <?php
 	while ( $upcoming_query->have_posts() ) {
 		$upcoming_query->the_post();
@@ -80,8 +82,7 @@ if ( $upcoming_query->have_posts() ) {
     get_template_part('partials/archive-exhibition-item');
   }
 ?>
-        </div>
-      </div>
+          </div>
 <?php
 }
 
@@ -104,11 +105,10 @@ $past_query = new WP_Query( $past_args );
 
 if ( $past_query->have_posts() ) {
 ?>
-      <div class="grid-row margin-bottom-basic">
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 exhibitions-section-label-holder">
-          <div class="exhibitions-section-label">Past</div>
-        </div>
-        <div class="grid-item item-s-12 item-m-6 offset-m-6 grid-row no-gutter">
+          <div class="grid-item item-s-12 exhibitions-section-label-holder">
+            <div class="exhibitions-section-label">Past</div>
+          </div>
+          <div class="grid-item item-s-12 grid-row no-gutter margin-bottom-basic">
 <?php
 	while ( $past_query->have_posts() ) {
 		$past_query->the_post();
@@ -116,14 +116,13 @@ if ( $past_query->have_posts() ) {
     get_template_part('partials/archive-exhibition-item');
   }
 ?>
-        </div>
-      </div>
+          </div>
 <?php
 }
 
 wp_reset_postdata();
 ?>
-
+      </div>
     </div>
   </section>
 
