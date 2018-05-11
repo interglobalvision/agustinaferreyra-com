@@ -10,7 +10,7 @@
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6">
           <div id="footer-holder" class="border-top padding-top-small">
-            <div class="font-uppercase font-bold">
+            <div class="font-uppercase font-heavy">
               Galería Agustina Ferreyra
             </div>
             <?php echo !empty($hours) ? '<div class="margin-top-small">' . $hours . '</div>' : ''; ?>
