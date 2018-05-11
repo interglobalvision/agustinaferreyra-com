@@ -28,7 +28,7 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header" class="margin-top-basic">
+  <header id="header" class="margin-top-basic font-heavy">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
 
     <div class="container">

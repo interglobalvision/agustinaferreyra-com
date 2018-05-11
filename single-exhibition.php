@@ -23,7 +23,7 @@ if (have_posts()) {
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-6">
             <?php
-              echo !empty($start) ? '<div class="font-bold font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
+              echo !empty($start) ? '<div class="font-heavy font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
             ?>
             <?php
               if (!empty($location)) {
@@ -39,7 +39,7 @@ if (have_posts()) {
             <?php
               if (!empty($artists)) {
                 foreach ($artists as $artist) {
-                  echo '<div class="font-bold font-uppercase font-size-large">' . $artist->name . '</div>';
+                  echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
                 }
               }
             ?>

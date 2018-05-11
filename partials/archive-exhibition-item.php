@@ -11,7 +11,7 @@ $location = wp_get_post_terms($post->ID, 'location');
       <?php
       if (!empty($artists)) {
         foreach ($artists as $artist) {
-          echo '<div class="font-bold font-size-large">' . $artist->name . '</div>';
+          echo '<div class="font-heavy font-size-large">' . $artist->name . '</div>';
         }
       }
 
@@ -20,7 +20,7 @@ $location = wp_get_post_terms($post->ID, 'location');
     </div>
     <div class="grid-item item-s-6">
       <?php
-        echo !empty($start) ? '<div class="font-bold font-uppercase font-size-large">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
+        echo !empty($start) ? '<div class="font-heavy font-uppercase font-size-large">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
 
         echo !empty($location) ? '<div>' . $location[0]->name . '</div>' : '';
       ?>
