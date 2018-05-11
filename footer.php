@@ -9,13 +9,13 @@
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6">
-          <div id="footer-holder" class="border-top padding-top-small">
-            <div class="font-uppercase font-heavy">
+          <div id="footer-holder" class="border-top padding-top-tiny">
+            <div class="font-uppercase font-heavy font-size-mid">
               Galería Agustina Ferreyra
             </div>
-            <?php echo !empty($hours) ? '<div class="margin-top-small">' . $hours . '</div>' : ''; ?>
-            <?php echo !empty($address) ? '<div class="margin-top-small">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
-            <?php echo !empty($email) ? '<div class="margin-top-small"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
+            <?php echo !empty($hours) ? '<div class="margin-top-tiny">' . $hours . '</div>' : ''; ?>
+            <?php echo !empty($address) ? '<div class="margin-top-tiny">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
+            <?php echo !empty($email) ? '<div class="margin-top-tiny"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
           </div>
         </div>
       </div>
