@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbf9f95b1add9419e94f3ff28c9c90e4",
+    "content-hash": "d9e7c80c647040e41cd423884217fba5",
     "packages": [
         {
             "name": "fightbulc/moment",
@@ -71,16 +71,16 @@
         },
         {
             "name": "webdevstudios/cmb2",
-            "version": "v2.2.5",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "1d580cceb3bbcc435192878769a7bde9d0be83ce"
+                "reference": "a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/1d580cceb3bbcc435192878769a7bde9d0be83ce",
-                "reference": "1d580cceb3bbcc435192878769a7bde9d0be83ce",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9",
+                "reference": "a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 "plugin",
                 "wordpress"
             ],
-            "time": "2017-08-07T16:26:35+00:00"
+            "time": "2017-12-20T14:18:52+00:00"
         },
         {
             "name": "webdevstudios/cmb2-post-search-field",
