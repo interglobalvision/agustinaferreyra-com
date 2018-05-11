@@ -5,7 +5,7 @@
   $email = $site_options['_igv_gallery_email'];
 ?>
 
-  <footer id="footer" class="margin-top-basic">
+  <footer id="footer" class="margin-top-basic padding-bottom-mid">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6">

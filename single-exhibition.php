@@ -20,7 +20,7 @@ if (have_posts()) {
     $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-        <div class="grid-row">
+        <div class="grid-row padding-bottom-basic">
           <div class="grid-item item-s-12 item-m-6">
             <?php
               echo !empty($start) ? '<div class="font-heavy font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
