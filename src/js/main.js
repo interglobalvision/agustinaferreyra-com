@@ -53,7 +53,7 @@ class Site {
     this.$footer = $('#footer');
     this.$hoverDotItem = $('.hover-dot');
     this.$hoverDot = $('.hover-dot .dot');
-    this.$logoDot = $('#logo-holder .logo-dot');
+    this.$logoDot = $('#logo .logo-dot');
     this.$postitDot = $('#postit-dot');
     this.$logoHolder = $('#logo-holder');
     this.$logo = $('#logo-holder #logo');
@@ -222,6 +222,7 @@ class Site {
       var padding = _this.windowHeight - offset - logoHeight;
 
       _this.$logoHolder.css('padding-top', padding + 'px');
+      _this.$logo.css('visibility', 'visible');
     }
   }
 
