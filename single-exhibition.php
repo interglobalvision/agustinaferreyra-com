@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="margin-top-large">
+<main id="main-content" class="margin-top-mid">
   <section id="posts">
     <div class="container">
 
