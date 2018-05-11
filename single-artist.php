@@ -1,21 +1,26 @@
 <?php
 get_header();
 
+?>
+
+<main id="main-content" class="margin-top-large padding-top-basic">
+
+<?php
+// Post-it
 $studio_pic = get_post_meta(get_the_ID(), '_igv_artist_studio_pic_id', true);
 
 if (!empty($studio_pic)) {
 ?>
 
-<div id="postit">
-  <?php echo wp_get_attachment_image($studio_pic, 'thumbnail', false, 'class=postit-image'); ?>
-  <div id="postit-dot" class="dot"></div>
-</div>
+  <div id="postit">
+    <?php echo wp_get_attachment_image($studio_pic, 'thumbnail', false, 'class=postit-image'); ?>
+    <div id="postit-dot" class="dot"></div>
+  </div>
 
 <?php
 }
 ?>
 
-<main id="main-content" class="margin-top-large padding-top-basic">
   <section id="posts">
     <div class="container">
 
