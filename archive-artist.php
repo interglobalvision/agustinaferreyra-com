@@ -18,7 +18,10 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
 ?>
-            <li class="margin-bottom-tiny font-size-mid"><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></li>
+            <li class="margin-bottom-tiny font-size-mid hover-dot">
+              <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a>
+              <div class="dot"></div>
+            </li>
 <?php
   }
 ?>
