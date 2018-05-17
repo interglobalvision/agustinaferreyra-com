@@ -48,7 +48,7 @@ get_template_part('partials/seo');
           </li>
         </ul>
       </nav>
-      <div id="logo-holder-mobile">
+      <div id="logo-holder-mobile" class="padding-top-mid">
         <?php get_template_part('partials/logo'); ?>
       </div>
     </div>

@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="margin-top-large padding-top-basic">
+<main id="main-content" class="margin-top-mid">
   <section id="posts">
     <div class="container">
       <div class="grid-row flex-nowrap">
@@ -18,7 +18,10 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
 ?>
-            <li class="margin-bottom-tiny font-size-mid"><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></li>
+            <li class="margin-bottom-tiny font-size-mid hover-dot">
+              <a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a>
+              <div class="dot"></div>
+            </li>
 <?php
   }
 ?>

@@ -3,7 +3,7 @@ get_header();
 
 ?>
 
-<main id="main-content" class="margin-top-large padding-top-basic">
+<main id="main-content" class="margin-top-mid">
 
 <?php
 // Post-it
@@ -35,15 +35,7 @@ if (have_posts()) {
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
         <div class="grid-row padding-bottom-basic">
           <div class="grid-item item-s-12 item-m-6 offset-m-6">
-            <div class="font-bold font-uppercase font-size-large margin-bottom-mid"><?php the_title(); ?></div>
-            <div class="grid-row justify-between align-items-start">
-              <div class="grid-item item-s-8 no-gutter">
-                <?php the_content(); ?>
-              </div>
-              <div class="grid-item no-gutter">
-                <?php echo !empty($cv_pdf) ? '<a href="' . $cv_pdf . '" class="link-underline">View CV</a>' : ''; ?>
-              </div>
-            </div>
+            <div class="font-bold font-uppercase font-size-large"><?php the_title(); ?></div>
           </div>
         </div>
 
@@ -53,6 +45,15 @@ if (have_posts()) {
           <div id="logo-holder" class="masonry-item">
             <div>
               <?php get_template_part('partials/logo'); ?>
+            </div>
+          </div>
+
+          <div class="masonry-item grid-row">
+            <div class="grid-item item-s-8 no-gutter">
+              <?php the_content(); ?>
+            </div>
+            <div class="grid-item no-gutter">
+              <?php echo !empty($cv_pdf) ? '<a href="' . $cv_pdf . '" class="link-underline">View CV</a>' : ''; ?>
             </div>
           </div>
 

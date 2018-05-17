@@ -1,34 +1,32 @@
 @media screen and (min-width: 720px)
 
-  $gutter = 21px
+  $gutter = 24px
 
   $margin-micro = ($gutter / 3)
   $margin-tiny = ($gutter / 2)
   $margin-small = ($gutter)
   $margin-basic = ($gutter * 2)
   $margin-mid = ($gutter * 3.5)
-  $margin-large = ($gutter * 7)
+  $margin-large = ($gutter * 5)
 
   $font-size-basic = 14px
+  $font-size-extra = 36px
+  $font-size-large = 27px
+  $font-size-mid = 24px
+  $font-size-small = 18px
+  $font-size-tiny = 9px
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  grid-maker( v, $gutter, m)
+  grid-maker( 96%, $gutter, m)
 
-  font-sizes($font-size-basic)
+  font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
 
   .mobile-only
     display: none !important
 
   // HEADER
-
-  #header
-    position: fixed
-    top: 0
-    left: 0
-    width: 100vw
-    z-index: 900
-
+  
   #main-nav-list-row
     justify-content: normal
 
@@ -63,6 +61,7 @@
   // MASONRY
 
   .masonry-item
+    width: 50%
     padding: 0 $margin-tiny $margin-basic
 
   #logo-holder.masonry-item
