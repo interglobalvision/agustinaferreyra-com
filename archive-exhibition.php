@@ -93,8 +93,14 @@ $past_args = array(
   'orderby' => 'meta_value_num',
   'meta_key' => '_igv_exhibition_start',
   'meta_query' => array(
+    'relation' => 'AND',
     array(
       'key'     => '_igv_exhibition_start',
+      'value'   => $now,
+      'compare' => '<',
+    ),
+    array(
+      'key'     => '_igv_exhibition_end',
       'value'   => $now,
       'compare' => '<',
     ),
