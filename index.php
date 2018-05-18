@@ -6,7 +6,7 @@ get_header();
   <section id="posts">
     <div class="container">
       <div class="grid-row">
-        <div class="grid-item item-s-12 item-m-6 no-gutter grid-row">
+        <div id="blog-info" class="grid-item item-s-12 item-m-6 no-gutter grid-row">
           <div class="grid-item item-s-12 desktop-only">
             <?php get_template_part('partials/logo'); ?>
           </div>
@@ -18,7 +18,7 @@ get_header();
 <?php
 if (have_posts()) {
 ?>
-        <div class="grid-item item-s-12 item-m-6 no-gutter grid-row align-items-start">
+        <div id="blog-posts" class="grid-item item-s-12 item-m-6 no-gutter grid-row align-items-start">
 <?php
   while (have_posts()) {
     the_post();
