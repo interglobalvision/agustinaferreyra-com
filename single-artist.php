@@ -67,7 +67,7 @@ if (have_posts()) {
           ?>
           <div class="masonry-item">
             <?php
-              echo wp_get_attachment_image($image['image_id'], 'full', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true','data-index'=>$index));
+              echo wp_get_attachment_image($image['image_id'], '1920', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true','data-index'=>$index));
 
               echo !empty($image['caption']) ? '<div class="masonry-item-caption margin-top-tiny">' . apply_filters('the_content', $image['caption']) . '</div>' : '';
             ?>
@@ -86,7 +86,7 @@ if (have_posts()) {
             <div class="slide-content-holder">
               <div class="grid-column justify-center align-items-center">
                 <div>
-                  <?php echo wp_get_attachment_image($image['image_id'], 'full', false, 'data-no-lazysizes=true'); ?>
+                  <?php echo wp_get_attachment_image($image['image_id'], '1920', false, 'data-no-lazysizes=true'); ?>
                 </div>
               </div>
             </div>
