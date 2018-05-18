@@ -52,7 +52,7 @@ if (have_posts()) {
             <div class="grid-item item-s-8 no-gutter">
               <?php the_content(); ?>
             </div>
-            <div class="grid-item no-gutter">
+            <div class="grid-item no-gutter item-s-4 text-align-right">
               <?php echo !empty($cv_pdf) ? '<a href="' . $cv_pdf . '" class="link-underline">View CV</a>' : ''; ?>
             </div>
           </div>
