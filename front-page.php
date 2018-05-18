@@ -15,7 +15,7 @@ get_header();
   }
 ?>
 
-<main id="main-content" class="margin-top-mid">
+<main id="main-content">
   <section id="posts">
     <div class="container">
       <div class="grid-row flex-nowrap">

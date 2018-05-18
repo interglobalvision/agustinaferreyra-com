@@ -1,19 +1,19 @@
-@media screen and (min-width: 720px)
+@media screen and (min-width: 840px)
 
-  $gutter = 24px
+  $gutter = 18px
 
   $margin-micro = ($gutter / 3)
   $margin-tiny = ($gutter / 2)
-  $margin-small = ($gutter)
-  $margin-basic = ($gutter * 2)
-  $margin-mid = ($gutter * 3.5)
-  $margin-large = ($gutter * 5)
+  $margin-small = ($gutter * .75)
+  $margin-basic = ($gutter * 1.5)
+  $margin-mid = ($gutter * 2)
+  $margin-large = ($gutter * 3)
 
   $font-size-basic = 14px
   $font-size-extra = 36px
-  $font-size-large = 27px
-  $font-size-mid = 24px
-  $font-size-small = 18px
+  $font-size-large = 21px
+  $font-size-mid = 16px
+  $font-size-small = 13px
   $font-size-tiny = 9px
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
@@ -26,7 +26,7 @@
     display: none !important
 
   // HEADER
-  
+
   #main-nav-list-row
     justify-content: normal
 
@@ -37,6 +37,7 @@
     width: auto
     padding-left: $margin-tiny
     padding-right: $margin-tiny
+    display: block
     #logo
       display: inline-block
 
@@ -62,7 +63,7 @@
 
   .masonry-item
     width: 50%
-    padding: 0 $margin-tiny $margin-basic
+    padding: 0 ($gutter / 2) $margin-basic
 
   #logo-holder.masonry-item
     width: 50%

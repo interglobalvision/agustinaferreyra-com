@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="margin-top-mid">
+<main id="main-content">
   <section id="posts">
     <div class="container">
 
@@ -20,8 +20,8 @@ if (have_posts()) {
     $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-        <div class="grid-row padding-bottom-basic">
-          <div class="grid-item item-s-12 item-m-6">
+        <div class="grid-row margin-bottom-mid">
+          <div class="grid-item item-s-12 item-m-6 margin-bottom-small">
             <?php
               echo !empty($start) ? '<div class="font-heavy font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
             ?>
@@ -44,10 +44,10 @@ if (have_posts()) {
               }
             ?>
             <div class="grid-row justify-between align-items-end">
-              <div class="grid-item no-gutter">
+              <div class="grid-item no-gutter item-s-8 margin-bottom-small">
                 <?php echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : ''; ?>
               </div>
-              <div class="grid-item no-gutter">
+              <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-small">
                 <?php echo !empty($pr_pdf) ? '<a href="' . $pr_pdf . '" class="link-underline">Press Release</a>' : ''; ?>
               </div>
             </div>

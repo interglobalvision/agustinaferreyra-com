@@ -1,17 +1,17 @@
-$gutter = 18px
+$gutter = 14px
 
 $margin-micro = ($gutter / 3)
 $margin-tiny = ($gutter / 2)
 $margin-small = ($gutter)
-$margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
+$margin-basic = ($gutter * 1.5)
+$margin-mid = ($gutter * 2)
+$margin-large = ($gutter * 3)
 
 $font-size-basic = 12px
 $font-size-extra = 32px
-$font-size-large = 24px
-$font-size-mid = 21px
-$font-size-small = 16px
+$font-size-large = 18px
+$font-size-mid = 16px
+$font-size-small = 14px
 $font-size-tiny = 8px
 
 grid-maker(96%, $gutter, s)
@@ -62,6 +62,7 @@ html, body
   z-index: 900
   width: 0
   padding: 0
+  display: none
   #logo
     display: none
     visibility: hidden
@@ -141,7 +142,6 @@ html, body
 .exhibitions-section-label
   width: 100%
   border-bottom: $border-style
-  padding-bottom: $margin-tiny
   text-transform: uppercase
 
 // ******************************************************
@@ -154,7 +154,7 @@ html, body
 
 .masonry-item
   width: 100%
-  padding: 0 $margin-small $margin-basic
+  padding: 0 ($gutter / 2) $margin-basic
   z-index: 0
 
 #logo-holder.masonry-item

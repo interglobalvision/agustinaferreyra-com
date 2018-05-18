@@ -1,20 +1,20 @@
 @media screen and (min-width: 1024px)
 
-  $gutter = 30px
+  $gutter = 24px
 
   $margin-micro = ($gutter / 3)
   $margin-tiny = ($gutter / 2)
-  $margin-small = ($gutter)
-  $margin-basic = ($gutter * 2)
-  $margin-mid = ($gutter * 3.5)
-  $margin-large = ($gutter * 5)
+  $margin-small = ($gutter * .75)
+  $margin-basic = ($gutter * 1.5)
+  $margin-mid = ($gutter * 2)
+  $margin-large = ($gutter * 3)
 
   $font-size-basic = 16px
   $font-size-extra = 40px
-  $font-size-large = 32px
-  $font-size-mid = 28px
-  $font-size-small = 21px
-  $font-size-tiny = 10px 
+  $font-size-large = 24px
+  $font-size-mid = 18px
+  $font-size-small = 14px
+  $font-size-tiny = 10px
 
   grid-maker(96%, $gutter, l)
 
@@ -41,4 +41,4 @@
   // MASONRY
 
   .masonry-item
-    padding: 0 $margin-tiny $margin-basic
+    padding: 0 ($gutter / 2) $margin-basic
