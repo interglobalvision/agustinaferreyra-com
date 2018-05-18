@@ -7,7 +7,7 @@ get_header();
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6 no-gutter grid-row">
-          <div class="grid-item item-s-12">
+          <div class="grid-item item-s-12 desktop-only">
             <?php get_template_part('partials/logo'); ?>
           </div>
           <div class="grid-item item-s-12 no-gutter">
