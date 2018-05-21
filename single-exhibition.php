@@ -37,22 +37,7 @@ if (have_posts()) {
           </div>
           <div class="grid-item item-s-12 item-m-6">
             <?php
-              if (!empty($artists)) {
-                if (count($artists) >= 5) {
-                  $artist_list = '';
-                  foreach ($artists as $key => $artist) {
-                   if ($key != 0) {
-                    $artist_list .= ', ';
-                   } 
-                   $artist_list .= $artist->name ;
-                  }
-                  echo '<div class="font-uppercase font-size-large font-heavy">' . $artist_list . '</div>';
-                } else {
-                  foreach ($artists as $artist) {
-                    echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
-                  }
-                }  
-              }
+              return_artist_list($artists);
             ?>
             <div class="grid-row justify-between align-items-end">
               <div class="grid-item no-gutter item-s-8 margin-bottom-small">
