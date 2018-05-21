@@ -35,9 +35,17 @@ html, body
 
 #postit
   position: absolute
-  z-index: 800
+  z-index: 1000
   width: 150px
   transform: rotate(-10deg)
+
+.postit-image
+  pointer-events: none
+  -khtml-user-select: none
+  -o-user-select: none
+  -moz-user-select: none
+  -webkit-user-select: none
+  user-select: none
 
 .dot
   background-color: $color-black
