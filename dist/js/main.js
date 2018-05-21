@@ -442,9 +442,6 @@ var Site = function () {
     $(window).resize((0, _debounce2.default)(this.onResize.bind(this), 200));
 
     $(document).ready(this.onReady.bind(this));
-    // this.handleMouseup = this.handleMouseup.bind(this);
-    // this.handleMousedown = this.handleMousedown.bind(this);
-    // this.handleDragging = this.handleDragging.bind(this);
   }
 
   _createClass(Site, [{
@@ -789,11 +786,6 @@ var Site = function () {
         }
       });
     }
-
-    // handleMousedown(e) {
-
-    // }
-
   }, {
     key: 'handleMouseup',
     value: function handleMouseup() {

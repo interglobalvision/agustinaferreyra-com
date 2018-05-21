@@ -20,9 +20,7 @@ class Site {
     );
 
     $(document).ready(this.onReady.bind(this));
-    // this.handleMouseup = this.handleMouseup.bind(this);
-    // this.handleMousedown = this.handleMousedown.bind(this);
-    // this.handleDragging = this.handleDragging.bind(this);
+
   }
 
   onResize() {
@@ -347,10 +345,6 @@ class Site {
       }
     });
   }
-
-  // handleMousedown(e) {
-    
-  // }
 
   handleMouseup() {
     $('body')
