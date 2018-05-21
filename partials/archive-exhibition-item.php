@@ -9,13 +9,22 @@ $location = wp_get_post_terms($post->ID, 'location');
   <a href="<?php the_permalink() ?>" class="grid-item item-s-12 grid-row no-gutter">
     <div class="grid-item item-s-12 item-m-6 font-uppercase margin-bottom-micro">
       <?php
-      if (!empty($artists)) {
-        foreach ($artists as $artist) {
-          echo '<div class="font-heavy font-size-large">' . $artist->name . '</div>';
+        if (!empty($artists)) {
+          if (count($artists) >= 5) {
+            $artist_list = '';
+            foreach ($artists as $key => $artist) {
+             if ($key != 0) {
+              $artist_list .= ', ';
+             } 
+             $artist_list .= $artist->name ;
+            }
+            echo '<div class="font-uppercase font-size-large font-heavy">' . $artist_list . '</div>';
+          } else {
+            foreach ($artists as $artist) {
+              echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
+            }
+          }  
         }
-      }
-
-      echo !empty($title) ? '<h2>' . $title . '</h2>' : '';
       ?>
     </div>
     <div class="grid-item item-s-12 item-m-6 margin-bottom-micro">
