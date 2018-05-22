@@ -8,9 +8,13 @@ $location = wp_get_post_terms($post->ID, 'location');
 <article <?php post_class('grid-item item-s-12 grid-row no-gutter hover-dot margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
   <a href="<?php the_permalink() ?>" class="grid-item item-s-12 grid-row no-gutter">
     <div class="grid-item item-s-12 item-m-6 font-uppercase margin-bottom-micro">
-      <?php
-        return_artist_list($artists);
-      ?>
+    <?php
+      if (!empty($artists)) {
+        foreach ($artists as $artist) {
+          echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
+        }
+      }
+    ?>
     </div>
     <div class="grid-item item-s-12 item-m-6 margin-bottom-micro">
       <?php
