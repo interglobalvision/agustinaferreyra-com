@@ -37,11 +37,7 @@ if (have_posts()) {
           </div>
           <div class="grid-item item-s-12 item-m-6">
             <?php
-              if (!empty($artists)) {
-                foreach ($artists as $artist) {
-                  echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
-                }
-              }
+              return_artist_list($artists);
             ?>
             <div class="grid-row justify-between align-items-end">
               <div class="grid-item no-gutter item-s-8 margin-bottom-small">
