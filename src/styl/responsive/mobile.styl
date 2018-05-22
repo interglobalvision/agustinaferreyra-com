@@ -39,13 +39,20 @@ html, body
   width: 150px
   transform: rotate(-10deg)
 
+#postit:hover
+  cursor: move
+  cursor: -webkit-grab
+  cursor: -moz-grab
+  cursor: grab
+
+#postit.grabbing
+  cursor: -webkit-grabbing
+  curosr: -moz-grabbing
+  cursor: grabbing
+
 .postit-image
   pointer-events: none
   user-select: none
-  cursor: grab
-
-.postit-image:active
-  cursor: grabbing
 
 .dot
   background-color: $color-black
