@@ -73,6 +73,7 @@ class Site {
     this.initMasonry();
     this.initCarousel();
     this.sizeLogoHolder();
+    this.bindPostitDrag();
   }
 
   fixWidows() {
@@ -344,6 +345,35 @@ class Site {
       }
     });
   }
+
+  handleMouseup() {
+    $('body')
+    .off('mousemove', this.handleDragging)
+    .off('mouseup', this.handleMouseup);
+  }
+
+  handleDragging(e) {
+    const left = window.drag.offset0.left + (e.pageX - window.drag.pageX0);
+    const top = window.drag.offset0.top + (e.pageY - window.drag.pageY0);
+    $(window.drag.elem)
+    .offset({top: top, left: left});
+  }
+
+  bindPostitDrag(e) {
+    let _this = this;
+
+    $('#postit').mousedown(function(e){
+      window.drag = {};
+      window.drag.pageX0 = e.pageX;
+      window.drag.pageY0 = e.pageY;
+      window.drag.elem = this;
+      window.drag.offset0 = $(this).offset();
+
+      $('body')
+      .on('mouseup', _this.handleMouseup)
+      .on('mousemove', _this.handleDragging);
+      });
+  }
 }
 
 new Site();
@@ -370,3 +400,4 @@ $.extend( $.easing,
     }
   }
 });
+
