@@ -472,7 +472,7 @@ var Site = function () {
       this.$body = $('body');
       this.$mainContainer = $('#main-container');
       this.$postit = $('#postit');
-      this.$masonryHolder = $('.masonry-holder');
+      this.$masonryHolder = $('#masonry-holder');
       this.$slickCarousel = $('.slick-carousel');
       this.$footer = $('#footer');
       this.$hoverDotItem = $('.hover-dot');
@@ -607,10 +607,10 @@ var Site = function () {
       var _this = this;
 
       if (_this.$masonryHolder.length) {
-        (0, _imagesloaded2.default)('.masonry-holder', function () {
+        (0, _imagesloaded2.default)('#masonry-holder', function () {
           _this.masonryImagesLoaded = true;
 
-          _this.masonryInstance = new _masonryLayout2.default('.masonry-holder', {
+          _this.masonryInstance = new _masonryLayout2.default('#masonry-holder', {
             itemSelector: '.masonry-item',
             transitionDuration: 0,
             initLayout: false,

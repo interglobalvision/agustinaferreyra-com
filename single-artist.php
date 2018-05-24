@@ -41,7 +41,7 @@ if (have_posts()) {
           </div>
         </div>
 
-        <div class="masonry-holder">
+        <div id="masonry-holder" class="hidden">
           <div class="masonry-gutter"></div>
 
           <div id="logo-holder" class="masonry-item">
