@@ -2,10 +2,21 @@
 get_header();
 ?>
 
-<section id="main-content">
-  <h1>Not found</h1>
-  <p>:(</p>
-</section>
+<main id="main-content">
+  <section id="404">
+    <div class="container">
+      <div class="grid-row flex-nowrap">
+        <div id="logo-holder" class="grid-item flex-grow">
+          <?php get_template_part('partials/logo'); ?>
+        </div>
+        <div class="grid-item item-s-12 item-m-6 padding-bottom-mid">
+          <h1 class="font-size-large font-heavy">404?!</h1>
+          <p>Whatever you're lookin' for ain't here</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <?php
 get_footer();
