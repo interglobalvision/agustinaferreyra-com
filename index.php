@@ -23,10 +23,11 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
 ?>
-          <article <?php post_class('grid-item item-s-12 item-m-6 border-top padding-top-small padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
-
-            <?php the_content(); ?>
-
+          <article <?php post_class('grid-item grid-row item-s-12 item-m-6 padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
+            <div class="grid-item no-gutter item-s-8 border-top margin-bottom-small"></div>
+            <div class="grid-item no-gutter item-s-12">
+              <?php the_content(); ?>
+            </div>
           </article>
 <?php
   }
