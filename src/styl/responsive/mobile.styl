@@ -38,17 +38,19 @@ html, body
   z-index: 1000
   width: 150px
   transform: rotate(-10deg)
-
-#postit:hover
-  cursor: move
-  cursor: -webkit-grab
-  cursor: -moz-grab
-  cursor: grab
-
-#postit.grabbing
-  cursor: -webkit-grabbing
-  curosr: -moz-grabbing
-  cursor: grabbing
+  #postit-scale
+    transition: transform 100ms ease-in-out
+  &:hover
+    cursor: move
+    cursor: -webkit-grab
+    cursor: -moz-grab
+    cursor: grab
+  &.grabbing
+    cursor: -webkit-grabbing
+    curosr: -moz-grabbing
+    cursor: grabbing
+    #postit-scale
+      transform: scale(1.1)
 
 .postit-image
   pointer-events: none

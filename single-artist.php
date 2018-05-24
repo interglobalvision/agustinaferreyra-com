@@ -13,8 +13,10 @@ if (!empty($studio_pic)) {
 ?>
 
   <div id="postit">
-    <?php echo wp_get_attachment_image($studio_pic, 'thumbnail', false, 'class=postit-image'); ?>
-    <div id="postit-dot" class="dot"></div>
+    <div id="postit-scale">
+      <?php echo wp_get_attachment_image($studio_pic, 'thumbnail', false, 'class=postit-image'); ?>
+      <div id="postit-dot" class="dot"></div>
+    </div>
   </div>
 
 <?php

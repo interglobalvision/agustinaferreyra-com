@@ -8,8 +8,10 @@ get_header();
   if (!empty($site_options['_igv_frontpage_postit_image_id'])) {
 ?>
 <div id="postit">
-  <?php echo wp_get_attachment_image($site_options['_igv_frontpage_postit_image_id'], 'thumbnail', false, 'class=postit-image'); ?>
-  <div id="postit-dot" class="dot"></div>
+  <div id="postit-scale">
+    <?php echo wp_get_attachment_image($site_options['_igv_frontpage_postit_image_id'], 'thumbnail', false, 'class=postit-image'); ?>
+    <div id="postit-dot" class="dot"></div>
+  </div>
 </div>
 <?php
   }
