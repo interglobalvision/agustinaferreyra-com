@@ -23,7 +23,7 @@ if (have_posts()) {
   while (have_posts()) {
     the_post();
 ?>
-          <article <?php post_class('grid-item item-s-12 item-m-6 border-top padding-top-small padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
+          <article <?php post_class('grid-item item-s-12 item-m-6 border-top padding-top-small padding-bottom-basic text-max-width'); ?> id="post-<?php the_ID(); ?>">
 
             <?php the_content(); ?>
 
