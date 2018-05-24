@@ -26,3 +26,27 @@ function igv_format_exhibition_dates($start, $end) {
     return $date_string;
   }
 }
+
+function return_artist_list($artists) {
+  if (!empty($artists)) {
+    if (count($artists) >= 5) {
+      $artist_list = '';
+      foreach ($artists as $key => $artist) {
+        $artist_list .= '<span class="u-inline-block">';
+
+        $artist_list .= $artist->name ;
+
+        if ($key != count($artists) - 1) {
+          $artist_list .= ',&nbsp;';
+        }
+
+        $artist_list .= '</span>';
+      }
+      echo '<div class="font-uppercase font-size-large font-heavy">' . $artist_list . '</div>';
+    } else {
+      foreach ($artists as $artist) {
+        echo '<div class="font-uppercase font-size-large font-heavy">' . $artist->name . '</div>';
+      }
+    }
+  }
+}
