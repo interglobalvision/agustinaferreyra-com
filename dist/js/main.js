@@ -790,6 +790,7 @@ var Site = function () {
     key: 'handleMouseup',
     value: function handleMouseup() {
       $('body').off('mousemove', this.handleDragging).off('mouseup', this.handleMouseup);
+      $('#postit').removeClass('grabbing');
     }
   }, {
     key: 'handleDragging',
@@ -804,6 +805,7 @@ var Site = function () {
       var _this = this;
 
       $('#postit').mousedown(function (e) {
+        $(this).addClass('grabbing');
         window.drag = {};
         window.drag.pageX0 = e.pageX;
         window.drag.pageY0 = e.pageY;

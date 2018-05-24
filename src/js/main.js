@@ -350,6 +350,7 @@ class Site {
     $('body')
     .off('mousemove', this.handleDragging)
     .off('mouseup', this.handleMouseup);
+    $('#postit').removeClass('grabbing');
   }
 
   handleDragging(e) {
@@ -363,6 +364,7 @@ class Site {
     let _this = this;
 
     $('#postit').mousedown(function(e){
+      $(this).addClass('grabbing');
       window.drag = {};
       window.drag.pageX0 = e.pageX;
       window.drag.pageY0 = e.pageY;
