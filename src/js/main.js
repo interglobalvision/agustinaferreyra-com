@@ -48,7 +48,7 @@ class Site {
     this.$body = $('body');
     this.$mainContainer = $('#main-container');
     this.$postit = $('#postit');
-    this.$masonryHolder = $('.masonry-holder');
+    this.$masonryHolder = $('#masonry-holder');
     this.$slickCarousel = $('.slick-carousel');
     this.$footer = $('#footer');
     this.$hoverDotItem = $('.hover-dot');
@@ -176,10 +176,10 @@ class Site {
     var _this = this;
 
     if (_this.$masonryHolder.length) {
-      imagesLoaded( '.masonry-holder', function() {
+      imagesLoaded( '#masonry-holder', function() {
         _this.masonryImagesLoaded = true;
 
-        _this.masonryInstance = new Masonry( '.masonry-holder', {
+        _this.masonryInstance = new Masonry( '#masonry-holder', {
           itemSelector: '.masonry-item',
           transitionDuration: 0,
           initLayout: false,
@@ -402,4 +402,3 @@ $.extend( $.easing,
     }
   }
 });
-
