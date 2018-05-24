@@ -1,5 +1,5 @@
 <?php
-if (!is_home()) {
+if (!is_home() && !is_singular('post')) {
   get_template_part('partials/footer-content');
 }
 ?>
