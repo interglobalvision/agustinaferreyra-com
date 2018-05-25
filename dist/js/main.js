@@ -450,7 +450,7 @@ var Site = function () {
       this.windowHeight = this.$window.height();
       this.windowWidth = this.$window.width();
 
-      this.dotSize();
+      this.setDotDiameter();
       this.positionPostit();
       this.sizeLogoHolder();
       this.layoutMasonry();
@@ -465,8 +465,6 @@ var Site = function () {
 
       this.windowHeight = this.$window.height();
       this.windowWidth = this.$window.width();
-      this.dotDiameter = 0;
-      this.dotRatio = 30.25;
       this.masonryImagesLoaded = false;
 
       this.$body = $('body');
@@ -491,7 +489,7 @@ var Site = function () {
       });
       this.logoDots = logoDots;
 
-      this.dotSize();
+      this.setDotDiameter();
       this.positionPostit();
       this.bindHoverDots();
       this.initMasonry();
@@ -510,21 +508,13 @@ var Site = function () {
       });
     }
   }, {
-    key: 'dotSize',
-    value: function dotSize() {
-      if (this.windowWidth > 720) {
-        // get dot diameter of first dot in logo svg
-        this.dotDiameter = this.$logo.width() * 0.035;
+    key: 'setDotDiameter',
+    value: function setDotDiameter() {
+      if (this.windowWidth < 720) {
+        this.dotDiameter = 9.8;
       } else {
-        this.dotDiameter = this.$logoMobile.width() * 0.035;
+        this.dotDiameter = 12.25;
       }
-
-      // resize all dots to match dots in logo svg
-      $('.dot').css({
-        'height': this.dotDiameter,
-        'width': this.dotDiameter,
-        'border-radius': this.dotDiameter
-      });
     }
   }, {
     key: 'positionPostit',
