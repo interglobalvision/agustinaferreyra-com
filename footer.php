@@ -1,10 +1,11 @@
+
+</section>
+
 <?php
 if (!is_home() && !is_singular('post')) {
   get_template_part('partials/footer-content');
 }
 ?>
-
-</section>
 
 <?php
 get_template_part('partials/scripts');
