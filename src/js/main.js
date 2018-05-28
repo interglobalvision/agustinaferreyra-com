@@ -27,7 +27,7 @@ class Site {
     this.windowHeight = this.$window.height();
     this.windowWidth = this.$window.width();
 
-    this.dotSize();
+    this.setDotDiameter();
     this.positionPostit();
     this.sizeLogoHolder();
     this.layoutMasonry();
@@ -41,8 +41,6 @@ class Site {
 
     this.windowHeight = this.$window.height();
     this.windowWidth = this.$window.width();
-    this.dotDiameter = 15;
-    this.dotRatio = 30.25;
     this.masonryImagesLoaded = false;
 
     this.$body = $('body');
@@ -53,13 +51,13 @@ class Site {
     this.$footer = $('#footer');
     this.$hoverDotItem = $('.hover-dot');
     this.$hoverDot = $('.hover-dot .dot');
-    this.$logoDot = $('#logo .logo-dot');
     this.$postitDot = $('#postit-dot');
     this.$logoHolder = $('#logo-holder');
-    this.$logo = $('#logo-holder #logo');
+    this.$logo = $('#logo-holder .logo');
+    this.$logoMobile = $('#logo-holder-mobile .logo');
 
     let logoDots = [];
-    this.$logoDot.each(function() {
+    $('.logo-dot').each(function() {
       logoDots.push({
         ref: $(this),
         hasFallen: false
@@ -67,7 +65,7 @@ class Site {
     });
     this.logoDots = logoDots;
 
-    this.dotSize();
+    this.setDotDiameter();
     this.positionPostit();
     this.bindHoverDots();
     this.initMasonry();
@@ -85,20 +83,12 @@ class Site {
     });
   }
 
-  dotSize() {
-    var _this = this;
-
-    if (_this.$logoDot.length) {
-      // get dot diameter of first dot in logo svg
-      _this.dotDiameter = _this.$logoDot.first().width();
+  setDotDiameter() {
+    if (this.windowWidth < 720) {
+      this.dotDiameter = 9.8;
+    } else {
+      this.dotDiameter = 12.25;
     }
-
-    // resize all dots to match dots in logo svg
-    $('.dot').css({
-      'height': _this.dotDiameter,
-      'width': _this.dotDiameter,
-      'border-radius': _this.dotDiameter,
-    });
   }
 
   positionPostit() {
@@ -133,7 +123,7 @@ class Site {
     if (_this.$postit.length) {
       // position post-it dot halfway off the top of post-it image
       _this.$postitDot.css({
-        'top': '-' + (_this.dotDiameter / 2) + 'px',
+        'top': '-' + (this.dotDiameter / 2) + 'px',
       });
     }
   }
@@ -159,7 +149,7 @@ class Site {
   positionHoverDots() {
     var _this = this;
 
-    var offset = _this.dotDiameter + 10;
+    var offset = this.dotDiameter + 10;
 
     _this.$hoverDot.each(function() {
       var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
