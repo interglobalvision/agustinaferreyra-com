@@ -37,6 +37,12 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Weather API Key', 'cmb2' ),
+    'id'      => $prefix . 'weather_api_key',
+    'type'    => 'text',
+  ) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Footer', 'cmb2' ),
     'id'      => $prefix . 'footer_title',
     'type'    => 'title',
