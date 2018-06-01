@@ -35,7 +35,7 @@ if (have_posts()) {
     $images = get_post_meta($post->ID, '_igv_artist_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-        <div class="grid-row margin-bottom-mid">
+        <div class="grid-row margin-bottom-basic">
           <div class="grid-item item-s-12 item-m-6 offset-m-6">
             <div class="font-bold font-uppercase font-size-large"><?php the_title(); ?></div>
           </div>

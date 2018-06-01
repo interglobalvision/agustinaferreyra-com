@@ -20,8 +20,8 @@ if (have_posts()) {
     $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-        <div class="grid-row margin-bottom-mid">
-          <div class="grid-item item-s-12 item-m-6 margin-bottom-small">
+        <div class="grid-row">
+          <div class="grid-item item-s-12 item-m-6 margin-bottom-basic">
             <?php
               echo !empty($start) ? '<div class="font-heavy font-uppercase font-size-mid">' . igv_format_exhibition_dates($start, $end) . '</div>' : '';
             ?>
@@ -40,10 +40,10 @@ if (have_posts()) {
               return_artist_list($artists);
             ?>
             <div class="grid-row justify-between align-items-end">
-              <div class="grid-item no-gutter item-s-8 margin-bottom-small">
+              <div class="grid-item no-gutter item-s-8 margin-bottom-basic">
                 <?php echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : ''; ?>
               </div>
-              <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-small">
+              <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-basic">
                 <?php echo !empty($pr_pdf) ? '<a href="' . $pr_pdf . '" class="link-underline">Press Release</a>' : ''; ?>
               </div>
             </div>
@@ -60,6 +60,18 @@ if (have_posts()) {
           </div>
 
         <?php
+          if (!empty(get_the_content())) {
+        ?>
+
+          <div class="masonry-item grid-row">
+            <div class="grid-item item-s-8 no-gutter">
+              <?php the_content(); ?>
+            </div>
+          </div>
+
+        <?php
+          }
+
           if (!empty($images)) {
         ?>
           <?php
