@@ -10,6 +10,8 @@ function renderLogoFact() {
 
   $key = array_rand($facts);
 
+  // TODO: split expo randomly. add 'closed' for last expo 
+
   if ($key === 'expo') {
     // Get current or upcoming exhibition
 
