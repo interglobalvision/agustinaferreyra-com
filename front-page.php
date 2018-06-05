@@ -21,7 +21,7 @@ get_header();
   <section id="posts">
     <div class="container">
       <div class="grid-row flex-nowrap">
-        <div id="logo-holder" class="grid-item flex-grow">
+        <div id="logo-holder" class="grid-item item-m-3">
           <?php get_template_part('partials/logo'); ?>
         </div>
         <div class="grid-item item-s-12 item-m-9 grid-row no-gutter align-self-start">

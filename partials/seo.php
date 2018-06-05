@@ -29,7 +29,7 @@ if (!empty($thumb) && is_single()) {
 } else if (!empty($ogImage)) {
   echo '<meta property="og:image" content="' . $ogImage[0] . '" />';
 } else {
-  echo '<meta property="og:image" content="' . get_stylesheet_directory_uri() . '/img/dist/favicon.png" />';
+  echo '<meta property="og:image" content="' . get_bloginfo('stylesheet_directory') . '/dist/img/agustina-ferreyra-og-image.jpg" />';
 }
 
 if (is_home()) {
@@ -38,8 +38,7 @@ if (is_home()) {
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
   <meta property="og:type" content="website" />
 <?php
-} else if (is_single()) {
-  global $post;
+} else if (is_single() && !empty($post->post_content)) {
   // trim post content by 600 chars
   $excerpt = substr($post->post_content, 0, 600);
   // strip html tags

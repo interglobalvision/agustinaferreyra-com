@@ -5,7 +5,7 @@ get_header();
 <main id="main-content">
   <section id="posts">
     <div class="container">
-      <div class="grid-row">
+      <div class="grid-row align-items-start">
         <div id="blog-info" class="grid-item item-s-12 item-m-6 no-gutter grid-row">
           <div class="grid-item item-s-12 desktop-only">
             <?php get_template_part('partials/logo'); ?>
