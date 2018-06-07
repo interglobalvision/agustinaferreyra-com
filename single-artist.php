@@ -69,7 +69,15 @@ if (have_posts()) {
           ?>
           <div class="masonry-item">
             <?php
-              echo wp_get_attachment_image($image['image_id'], '1920', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true','data-index'=>$index));
+              if (!empty($image['image_id'])) {
+                echo wp_get_attachment_image($image['image_id'], '1920', false, array('class'=>'carousel-trigger','data-no-lazysizes'=>'true','data-index'=>$index));
+              } elseif (!empty($image['vimeo_id'])) {
+            ?>
+
+            <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/<?php echo $image['vimeo_id']; ?>?color=ffffff&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+            <?php
+              }
 
               echo !empty($image['caption']) ? '<div class="masonry-item-caption margin-top-tiny">' . apply_filters('the_content', $image['caption']) . '</div>' : '';
             ?>
