@@ -79,12 +79,15 @@ class BlogFact {
             return false;
         }
       } catch (Exception $e) {
+        // Remove this as fact option
         unset($this->facts['weather']);
 
         return false;
       }
     } else {
+      // Remove this as fact option
       unset($this->$facts['weather']);
+
       return false;
     }
   }
@@ -173,6 +176,7 @@ class BlogFact {
         return sprintf($string, $value);
       }
     } else {
+      // Remove this as fact option
       unset($this->facts['expo']['closes']);
 
       return false;
@@ -206,6 +210,7 @@ class BlogFact {
         return sprintf($string, $value);
       }
     } else {
+      // Remove this as fact option
       unset($this->facts['expo']['opens']);
 
       return false;
@@ -239,6 +244,7 @@ class BlogFact {
         return sprintf($string, $value);
       }
     } else {
+      // Remove this as fact option
       unset($this->facts['expo']['closed']);
 
       return false;
