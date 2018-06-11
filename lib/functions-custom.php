@@ -50,3 +50,19 @@ function return_artist_list($artists) {
     }
   }
 }
+
+function render_postit($id) {
+  $file_path = wp_get_attachment_url($id);
+  $filetype = wp_check_filetype($file_path);
+  $size = $filetype['ext'] === 'gif' ? 'full' : 'thumbnail';
+?>
+  <div id="postit">
+    <div id="postit-scale">
+      <?php
+        echo wp_get_attachment_image($id, $size, false, 'class=postit-image');
+      ?>
+      <div id="postit-dot" class="dot"></div>
+    </div>
+  </div>
+  <?php
+}

@@ -6,14 +6,7 @@ get_header();
   $site_options = get_site_option('_igv_site_options');
 
   if (!empty($site_options['_igv_frontpage_postit_image_id'])) {
-?>
-<div id="postit">
-  <div id="postit-scale">
-    <?php echo wp_get_attachment_image($site_options['_igv_frontpage_postit_image_id'], 'thumbnail', false, 'class=postit-image'); ?>
-    <div id="postit-dot" class="dot"></div>
-  </div>
-</div>
-<?php
+    render_postit($site_options['_igv_frontpage_postit_image_id']);
   }
 ?>
 

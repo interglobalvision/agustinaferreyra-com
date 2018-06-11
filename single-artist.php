@@ -10,16 +10,7 @@ get_header();
 $studio_pic = get_post_meta(get_the_ID(), '_igv_artist_studio_pic_id', true);
 
 if (!empty($studio_pic)) {
-?>
-
-  <div id="postit">
-    <div id="postit-scale">
-      <?php echo wp_get_attachment_image($studio_pic, 'thumbnail', false, 'class=postit-image'); ?>
-      <div id="postit-dot" class="dot"></div>
-    </div>
-  </div>
-
-<?php
+  render_postit($studio_pic);
 }
 ?>
 
