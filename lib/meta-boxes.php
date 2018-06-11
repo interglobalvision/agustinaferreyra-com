@@ -64,8 +64,24 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_field( array(
-		'name' => esc_html__( 'Press Release PDF', 'cmb2' ),
+		'name' => esc_html__( 'Press Release PDF English', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_pdf',
+		'type' => 'file',
+    'options' => array(
+  		'url' => false, // Hide the text input for the url
+  	),
+    'text'    => array(
+  		'add_upload_file_text' => 'Add PDF'
+  	),
+  	// query_args are passed to wp.media's library query.
+  	'query_args' => array(
+  		'type' => 'application/pdf', // Make library only display PDFs.
+  	),
+	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Press Release PDF Español', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_pdf_es',
 		'type' => 'file',
     'options' => array(
   		'url' => false, // Hide the text input for the url
