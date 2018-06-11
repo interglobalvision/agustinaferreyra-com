@@ -11,7 +11,7 @@
       <div class="grid-item item-s-12 <?php echo !is_home() ? 'item-m-6' : ''; ?>">
         <div id="footer-holder" class="border-top padding-top-tiny">
           <div class="font-uppercase font-heavy font-size-mid">
-            Galería Agustina Ferreyra
+            <a href="<?php echo home_url(); ?>">Galería Agustina Ferreyra</a>
           </div>
           <?php echo !empty($hours) ? '<div class="margin-top-tiny">' . $hours . '</div>' : ''; ?>
           <?php echo !empty($address) ? '<div class="margin-top-tiny">' . apply_filters('the_content', $address) . '</div>' : ''; ?>

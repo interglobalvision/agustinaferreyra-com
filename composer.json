@@ -9,6 +9,7 @@
   "require": {
     "webdevstudios/cmb2": "^2.3",
     "webdevstudios/cmb2-post-search-field": "*",
-    "fightbulc/moment": "*"
+    "fightbulc/moment": "*",
+    "guzzlehttp/guzzle": "^6.3"
   }
 }
