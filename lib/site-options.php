@@ -43,6 +43,13 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Blog Logo Strings', 'cmb2' ),
+    'id'      => $prefix . 'blog_logo_strings',
+    'type'    => 'text',
+    'repeatable' => true,
+  ) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Footer', 'cmb2' ),
     'id'      => $prefix . 'footer_title',
     'type'    => 'title',
