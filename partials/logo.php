@@ -1,8 +1,11 @@
 <div class="logo">
-  <?php if (is_singular('post') || is_home()) { ?>
+  <?php
+    if (is_singular('post') || is_home()) {
+      $blogFact = new BlogFact;
+  ?>
   <a>
     <div class="logo-fact font-size-extra font-heavy">
-      <?php renderLogofact(); ?>
+      <?php $blogFact->renderFact(); ?>
     </div>
   <?php } else { ?>
   <a href="<?php echo home_url(); ?>">
