@@ -116,6 +116,12 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_group_field( $exhibition_images_group, array(
+		'name' => esc_html__( 'Vimeo ID', 'cmb2' ),
+		'id'   => 'vimeo_id',
+		'type' => 'text_small',
+	) );
+
+  $exhibition_metabox->add_group_field( $exhibition_images_group, array(
 		'name' => esc_html__( 'Caption', 'cmb2' ),
 		'id'   => 'caption',
 		'type' => 'wysiwyg',
@@ -197,6 +203,12 @@ function igv_cmb_metaboxes() {
     'options' => array(
   		'url' => false, // Hide the text input for the url
   	),
+	) );
+
+  $artist_metabox->add_group_field( $artist_images_group, array(
+		'name' => esc_html__( 'Vimeo ID', 'cmb2' ),
+		'id'   => 'vimeo_id',
+		'type' => 'text_small',
 	) );
 
   $artist_metabox->add_group_field( $artist_images_group, array(
