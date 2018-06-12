@@ -1,6 +1,6 @@
 <?php
 class BlogFact {
-  public $facts = array(
+  private $facts = array(
     'weather' => array(
       'temp' => 'Current temp in CDMX is %d&deg;C',
       'conditions' => '%s in CDMX',
@@ -26,7 +26,7 @@ class BlogFact {
     echo $fact;
   }
 
-  public function getFact() {
+  private function getFact() {
     switch (array_rand($this->facts)) {
       case 'weather':
         $fact = $this->getWeatherFact();
@@ -48,7 +48,7 @@ class BlogFact {
     return $fact;
   }
 
-  public function getWeatherFact() {
+  private function getWeatherFact() {
     $site_options = get_site_option('_igv_site_options');
 
     // Check the API key
@@ -92,7 +92,7 @@ class BlogFact {
     }
   }
 
-  public function getWeatherTemp($weatherRes) {
+  private function getWeatherTemp($weatherRes) {
     // Display current temperature in CDMX
 
     $string = $this->facts['weather']['temp'];
@@ -102,7 +102,7 @@ class BlogFact {
     return sprintf($string, $value);
   }
 
-  public function getWeatherConditions($weatherRes) {
+  private function getWeatherConditions($weatherRes) {
     // Display current weather conditions in CDMX
 
     $string = $this->facts['weather']['conditions'];
@@ -113,7 +113,7 @@ class BlogFact {
     return sprintf($string, $value);
   }
 
-  public function getExpoFact() {
+  private function getExpoFact() {
     $this->timeNow = time();
 
     $this->expoArgs = array(
@@ -143,7 +143,7 @@ class BlogFact {
     }
   }
 
-  public function getExpoCloses() {
+  private function getExpoCloses() {
     // Display current exhibition fact
 
     $this->expoArgs['meta_query'] = array(
@@ -183,7 +183,7 @@ class BlogFact {
     }
   }
 
-  public function getExpoOpens() {
+  private function getExpoOpens() {
     // Display upcoming exhibition fact
 
     $this->expoArgs['meta_query'] = array(
@@ -217,7 +217,7 @@ class BlogFact {
     }
   }
 
-  public function getExpoClosed() {
+  private function getExpoClosed() {
     // Display past exhibition fact
 
     $this->expoArgs['meta_query'] = array(
@@ -251,7 +251,7 @@ class BlogFact {
     }
   }
 
-  public function getStringFact() {
+  private function getStringFact() {
     return $this->facts['string'][array_rand($this->facts['string'])];
   }
 }
