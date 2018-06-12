@@ -16,7 +16,8 @@ if (have_posts()) {
     $start = get_post_meta($post->ID, '_igv_exhibition_start', true);
     $end = get_post_meta($post->ID, '_igv_exhibition_end', true);
     $location = wp_get_post_terms($post->ID, 'location');
-    $pr_pdf = get_post_meta($post->ID, '_igv_exhibition_pdf', true);
+    $pr_pdf_en = get_post_meta($post->ID, '_igv_exhibition_pdf', true);
+    $pr_pdf_es = get_post_meta($post->ID, '_igv_exhibition_pdf_es', true);
     $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -44,7 +45,17 @@ if (have_posts()) {
                 <?php echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : ''; ?>
               </div>
               <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-basic">
-                <?php echo !empty($pr_pdf) ? '<a href="' . $pr_pdf . '" class="link-underline">Press Release</a>' : ''; ?>
+                <?php
+                  if (!empty($pr_pdf_en) && !empty($pr_pdf_es)) {
+                    echo 'Press Release ';
+                    echo !empty($pr_pdf_en) ? '<a href="' . $pr_pdf_en . '" class="link-underline">EN</a> ' : '';
+                    echo !empty($pr_pdf_es) ? '<a href="' . $pr_pdf_es . '" class="link-underline">ES</a>' : '';
+                  } elseif (!empty($pr_pdf_en)) {
+                    echo !empty($pr_pdf_en) ? '<a href="' . $pr_pdf_en . '" class="link-underline">Press Release</a>' : '';
+                  } elseif (!empty($pr_pdf_es)) {
+                    echo !empty($pr_pdf_es) ? '<a href="' . $pr_pdf_es . '" class="link-underline">Press Release</a>' : '';
+                  }
+                ?>
               </div>
             </div>
           </div>

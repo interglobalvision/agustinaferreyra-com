@@ -18,20 +18,22 @@ get_header();
 <?php
 if (have_posts()) {
 ?>
-        <div id="blog-posts" class="grid-item item-s-12 item-m-6 no-gutter grid-row align-items-start">
+        <div id="blog-posts" class="grid-item item-s-12 item-m-6 no-gutter align-items-start">
+          <div id="masonry-holder">
 <?php
   while (have_posts()) {
     the_post();
 ?>
-          <article <?php post_class('grid-item grid-row item-s-12 item-m-6 padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
-            <div class="grid-item no-gutter item-s-8 border-top margin-bottom-small"></div>
-            <div class="grid-item no-gutter item-s-12 text-max-width">
-              <?php the_content(); ?>
-            </div>
-          </article>
+            <article <?php post_class('masonry-item padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
+              <div class="grid-item no-gutter item-s-8 border-top margin-bottom-small"></div>
+              <div class="grid-item no-gutter item-s-12 text-max-width">
+                <?php the_content(); ?>
+              </div>
+            </article>
 <?php
   }
 ?>
+          </div>
         </div>
 <?php
 }
