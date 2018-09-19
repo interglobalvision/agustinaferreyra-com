@@ -19,5 +19,6 @@
         </div>
       </div>
     </div>
+    <?php get_template_part('partials/mailinglist-form'); ?>
   <?php echo !is_home() ? '</div>' : ''; ?>
 </footer>
