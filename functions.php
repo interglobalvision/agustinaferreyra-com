@@ -9,10 +9,13 @@ function scripts_and_styles_method() {
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
 
+  $site_options = get_site_option('_igv_site_options');
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
+    'mailchimp' => !empty($site_options['_igv_mailchimp_url']) ? $site_options['_igv_mailchimp_url'] : null,
   );
 
   wp_register_script('javascript-main', $javascriptMain);
