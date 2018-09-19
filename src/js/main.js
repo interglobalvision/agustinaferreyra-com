@@ -7,6 +7,7 @@ import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 import slick from 'slick-carousel';
 import debounce from 'debounce';
+import Mailchimp from './mailchimp';
 
 // Import style
 import '../styl/site.styl';
@@ -369,7 +370,7 @@ class Site {
 }
 
 new Site();
-
+new Mailchimp();
 
 // eastOutBounce easing
 $.easing.jswing = $.easing.swing;
