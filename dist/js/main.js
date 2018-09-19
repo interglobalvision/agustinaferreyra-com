@@ -427,7 +427,11 @@ var _debounce = __webpack_require__(13);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-__webpack_require__(14);
+var _mailchimp = __webpack_require__(14);
+
+var _mailchimp2 = _interopRequireDefault(_mailchimp);
+
+__webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -811,6 +815,7 @@ var Site = function () {
 }();
 
 new Site();
+new _mailchimp2.default();
 
 // eastOutBounce easing
 $.easing.jswing = $.easing.swing;
@@ -6801,6 +6806,145 @@ module.exports = function debounce(func, wait, immediate) {
 
 /***/ }),
 /* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document, WP */
+
+var Mailchimp = function () {
+  function Mailchimp() {
+    _classCallCheck(this, Mailchimp);
+
+    this.mobileThreshold = 601;
+
+    $(window).on('ajaxSuccess', this.onReady.bind(this)); // Bind ajaxSuccess (custom event, comes from Ajaxy)
+
+    $(document).ready(this.onReady.bind(this));
+
+    // Bind functions
+    this.submitForm = this.submitForm.bind(this);
+    this.successMessage = this.successMessage.bind(this);
+  }
+
+  _createClass(Mailchimp, [{
+    key: 'onReady',
+    value: function onReady() {
+      this.$form = $('#mailchimp-form');
+
+      if (this.$form.length && WP.mailchimp !== null) {
+        this.$email = $('#mailchimp-email');
+        this.$reply = $('#mailchimp-response');
+
+        // Bind form submit event
+        this.$form.submit(this.submitForm);
+      }
+    }
+  }, {
+    key: 'submitForm',
+    value: function submitForm() {
+      var data = {};
+
+      // Get form data
+      var dataArray = this.$form.serializeArray();
+
+      // Create data object from form data
+      $.each(dataArray, function (index, item) {
+        data[item.name] = item.value;
+      });
+
+      this.handleMailchimpAjax(data, this.successMessage);
+
+      // Prevent default submit functionality
+      return false;
+    }
+  }, {
+    key: 'handleMailchimpAjax',
+    value: function handleMailchimpAjax(data, successCallback) {
+      // Rewrite action URL for JSONP
+      var url = WP.mailchimp.replace('/post?', '/post-json?').concat('&c=?');
+
+      // Ajax post to Mailchimp API
+      $.ajax({
+        url: url,
+        data: data,
+        success: successCallback,
+        dataType: 'jsonp',
+        error: function error(resp, text) {
+          console.log('mailchimp ajax submit error: ' + text);
+        }
+      });
+    }
+
+    /**
+    * Handle response message
+    */
+
+  }, {
+    key: 'successMessage',
+    value: function successMessage(response) {
+      var msg = '';
+
+      if (response.result === 'success') {
+
+        // Success message
+        msg = 'You\'ve been successfully subscribed';
+
+        // Set class .valid on form elements
+        this.$reply.removeClass('error').addClass('valid');
+        this.$email.removeClass('error').addClass('valid');
+      } else {
+        // Set class .error on form elements
+        this.$email.removeClass('valid').addClass('error');
+        this.$reply.removeClass('valid').addClass('error');
+
+        // Make error message from API response
+        var index = -1;
+
+        try {
+          var parts = response.msg.split(' - ', 2);
+
+          if (parts[1] === undefined) {
+            msg = response.msg;
+          } else {
+            var i = parseInt(parts[0], 10);
+
+            if (i.toString() === parts[0]) {
+              index = parts[0];
+              msg = parts[1];
+            } else {
+              index = -1;
+              msg = response.msg;
+            }
+          }
+        } catch (e) {
+          index = -1;
+          msg = response.msg;
+        }
+      }
+
+      // Show message
+      this.$reply.html(msg);
+    }
+  }]);
+
+  return Mailchimp;
+}();
+
+exports.default = Mailchimp;
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
