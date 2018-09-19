@@ -84,6 +84,13 @@ function igv_register_theme_options_metabox() {
     'default' => 'info@agustinaferreyra.com',
   ) );
 
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Mailchimp Form Action URL', 'cmb2' ),
+    'id'      => $prefix . 'mailchimp_url',
+    'type'    => 'text',
+    'default' => 'https://agustinaferreyra.us2.list-manage.com/subscribe/post?u=0fed3fcc880adb77f41217cf3&amp;id=536a3f96c4',
+  ) );
+
   // Social Media variables
 
   $site_options->add_field( array(
