@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <?php
-get_template_part('partials/globie');
+// get_template_part('partials/globie');
 get_template_part('partials/seo');
 ?>
 
@@ -27,7 +27,7 @@ get_template_part('partials/seo');
 <body <?php body_class(); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
-<section id="main-container">
+<div id="main-container">
 
   <header id="header" class="padding-top-basic margin-bottom-large font-heavy">
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>

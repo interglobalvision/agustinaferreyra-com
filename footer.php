@@ -1,5 +1,5 @@
 
-</section>
+</div>
 
 <?php
 if (!is_home() && !is_singular('post')) {
