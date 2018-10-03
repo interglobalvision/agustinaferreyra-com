@@ -167,8 +167,6 @@ class Site {
     var _this = this;
 
     if (_this.$masonryHolder.length) {
-      imagesLoaded( '#masonry-holder', function() {
-        _this.masonryImagesLoaded = true;
 
         _this.masonryInstance = new Masonry( '#masonry-holder', {
           itemSelector: '.masonry-item',
@@ -177,28 +175,18 @@ class Site {
           percentPosition: true
         });
 
+        imagesLoaded('#masonry-holder').on( 'progress', function() {
+          _this.masonryInstance.layout();
+        });
+
         _this.masonryInstance.on('layoutComplete', function() {
-          // show masonry container after layout
-          _this.$masonryHolder.removeClass('hidden');
           _this.bindDotDrop();
         });
 
-        _this.layoutMasonry();
-      });
     } else {
+
       _this.bindDotDrop();
-    }
-  }
-
-  layoutMasonry() {
-    var _this = this;
-
-    if (_this.masonryImagesLoaded) {
-      // hide masonry container during layout
-      _this.$masonryHolder.addClass('hidden');
-
-      // layout masonry items
-      _this.masonryInstance.layout();
+      
     }
   }
 

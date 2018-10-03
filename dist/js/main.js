@@ -601,39 +601,24 @@ var Site = function () {
       var _this = this;
 
       if (_this.$masonryHolder.length) {
-        (0, _imagesloaded2.default)('#masonry-holder', function () {
-          _this.masonryImagesLoaded = true;
 
-          _this.masonryInstance = new _masonryLayout2.default('#masonry-holder', {
-            itemSelector: '.masonry-item',
-            transitionDuration: 0,
-            initLayout: false,
-            percentPosition: true
-          });
+        _this.masonryInstance = new _masonryLayout2.default('#masonry-holder', {
+          itemSelector: '.masonry-item',
+          transitionDuration: 0,
+          initLayout: false,
+          percentPosition: true
+        });
 
-          _this.masonryInstance.on('layoutComplete', function () {
-            // show masonry container after layout
-            _this.$masonryHolder.removeClass('hidden');
-            _this.bindDotDrop();
-          });
+        (0, _imagesloaded2.default)('#masonry-holder').on('progress', function () {
+          _this.masonryInstance.layout();
+        });
 
-          _this.layoutMasonry();
+        _this.masonryInstance.on('layoutComplete', function () {
+          _this.bindDotDrop();
         });
       } else {
+
         _this.bindDotDrop();
-      }
-    }
-  }, {
-    key: 'layoutMasonry',
-    value: function layoutMasonry() {
-      var _this = this;
-
-      if (_this.masonryImagesLoaded) {
-        // hide masonry container during layout
-        _this.$masonryHolder.addClass('hidden');
-
-        // layout masonry items
-        _this.masonryInstance.layout();
       }
     }
   }, {
