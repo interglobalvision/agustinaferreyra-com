@@ -622,6 +622,15 @@ var Site = function () {
       }
     }
   }, {
+    key: 'layoutMasonry',
+    value: function layoutMasonry() {
+      var _this = this;
+
+      if (_this.$masonryHolder.length) {
+        _this.masonryInstance.layout();
+      }
+    }
+  }, {
     key: 'sizeLogoHolder',
     value: function sizeLogoHolder() {
       var _this = this;

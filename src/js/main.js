@@ -168,25 +168,33 @@ class Site {
 
     if (_this.$masonryHolder.length) {
 
-        _this.masonryInstance = new Masonry( '#masonry-holder', {
-          itemSelector: '.masonry-item',
-          transitionDuration: 0,
-          initLayout: false,
-          percentPosition: true
-        });
+      _this.masonryInstance = new Masonry( '#masonry-holder', {
+        itemSelector: '.masonry-item',
+        transitionDuration: 0,
+        initLayout: false,
+        percentPosition: true
+      });
 
-        imagesLoaded('#masonry-holder').on( 'progress', function() {
-          _this.masonryInstance.layout();
-        });
+      imagesLoaded('#masonry-holder').on( 'progress', function() {
+        _this.masonryInstance.layout();
+      });
 
-        _this.masonryInstance.on('layoutComplete', function() {
-          _this.bindDotDrop();
-        });
+      _this.masonryInstance.on('layoutComplete', function() {
+        _this.bindDotDrop();
+      });
 
     } else {
 
       _this.bindDotDrop();
-      
+
+    }
+  }
+
+  layoutMasonry() {
+    var _this = this;
+
+    if (_this.$masonryHolder.length) {
+      _this.masonryInstance.layout();
     }
   }
 
