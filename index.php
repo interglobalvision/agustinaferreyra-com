@@ -26,7 +26,7 @@ if (have_posts()) {
 ?>
             <article <?php post_class('masonry-item padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
               <div class="grid-item no-gutter item-s-8 border-top margin-bottom-small"></div>
-              <div class="grid-item no-gutter item-s-12 text-max-width">
+              <div class="grid-item no-gutter item-s-12 text-max-width text-align-justify">
                 <?php the_content(); ?>
               </div>
             </article>

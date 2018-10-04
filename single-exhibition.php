@@ -75,7 +75,7 @@ if (have_posts()) {
         ?>
 
           <div class="masonry-item grid-row">
-            <div class="grid-item item-s-8 no-gutter">
+            <div class="grid-item item-s-8 no-gutter text-align-justify">
               <?php the_content(); ?>
             </div>
           </div>
