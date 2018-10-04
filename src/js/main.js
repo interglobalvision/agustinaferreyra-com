@@ -175,7 +175,10 @@ class Site {
         percentPosition: true
       });
 
-      imagesLoaded('#masonry-holder').on( 'progress', function() {
+      _this.masonryInstance.layout();
+      _this.$masonryHolder.removeClass('hidden');
+
+      imagesLoaded('#masonry-holder').on( 'progress', function(imgLoad, image) {
         _this.masonryInstance.layout();
       });
 

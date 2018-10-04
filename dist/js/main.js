@@ -609,7 +609,10 @@ var Site = function () {
           percentPosition: true
         });
 
-        (0, _imagesloaded2.default)('#masonry-holder').on('progress', function () {
+        _this.masonryInstance.layout();
+        _this.$masonryHolder.removeClass('hidden');
+
+        (0, _imagesloaded2.default)('#masonry-holder').on('progress', function (imgLoad, image) {
           _this.masonryInstance.layout();
         });
 

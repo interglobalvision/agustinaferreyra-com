@@ -19,7 +19,7 @@ get_header();
 if (have_posts()) {
 ?>
         <div id="blog-posts" class="grid-item item-s-12 item-m-6 no-gutter align-items-start">
-          <div id="masonry-holder">
+          <div id="masonry-holder" class="hidden">
 <?php
   while (have_posts()) {
     the_post();
