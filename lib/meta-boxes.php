@@ -64,6 +64,12 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Show title in archive', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_show_title',
+		'type' => 'checkbox',
+	) );
+
+  $exhibition_metabox->add_field( array(
 		'name' => esc_html__( 'Press Release PDF English', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_pdf',
 		'type' => 'file',
