@@ -5,7 +5,6 @@ $start = get_post_meta($post->ID, '_igv_exhibition_start', true);
 $end = get_post_meta($post->ID, '_igv_exhibition_end', true);
 $location = wp_get_post_terms($post->ID, 'location');
 $show_title = get_post_meta($post->ID, '_igv_exhibition_show_title', true);
-var_dump($show_title);
 ?>
 <article <?php post_class('grid-item item-s-12 grid-row no-gutter hover-dot margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
   <a href="<?php the_permalink() ?>" class="grid-item item-s-12 grid-row no-gutter">
