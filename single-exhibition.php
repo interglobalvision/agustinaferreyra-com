@@ -19,6 +19,7 @@ if (have_posts()) {
     $pr_pdf_en = get_post_meta($post->ID, '_igv_exhibition_pdf', true);
     $pr_pdf_es = get_post_meta($post->ID, '_igv_exhibition_pdf_es', true);
     $images = get_post_meta($post->ID, '_igv_exhibition_images', true);
+    $emphasize_title = get_post_meta($post->ID, '_igv_exhibition_emphasize_title', true);
 ?>
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
         <div class="grid-row">
@@ -38,24 +39,24 @@ if (have_posts()) {
           </div>
           <div class="grid-item item-s-12 item-m-6">
             <?php
-              return_artist_list($artists);
+              if (!empty($emphasize_title) && !empty($title)) {
+                echo '<h2 class="font-uppercase font-size-large font-heavy">' . $title . '</h2>';
+              } else if (!empty($artists)) {
+                return_artist_list($artists, 'font-uppercase font-size-large font-heavy');
+              }
             ?>
             <div class="grid-row justify-between align-items-end">
               <div class="grid-item no-gutter item-s-8 margin-bottom-basic">
-                <?php echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : ''; ?>
-              </div>
-              <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-basic">
                 <?php
-                  if (!empty($pr_pdf_en) && !empty($pr_pdf_es)) {
-                    echo 'Press Release ';
-                    echo !empty($pr_pdf_en) ? '<a href="' . $pr_pdf_en . '" class="link-underline">EN</a> ' : '';
-                    echo !empty($pr_pdf_es) ? '<a href="' . $pr_pdf_es . '" class="link-underline">ES</a>' : '';
-                  } elseif (!empty($pr_pdf_en)) {
-                    echo !empty($pr_pdf_en) ? '<a href="' . $pr_pdf_en . '" class="link-underline">Press Release</a>' : '';
-                  } elseif (!empty($pr_pdf_es)) {
-                    echo !empty($pr_pdf_es) ? '<a href="' . $pr_pdf_es . '" class="link-underline">Press Release</a>' : '';
+                  if (!empty($emphasize_title) && !empty($artists)) {
+                    return_artist_list($artists, 'font-uppercase');
+                  } else if (!empty($title)) {
+                    echo !empty($title) ? '<h2 class="font-uppercase font-size-mid">' . $title . '</h2>' : '';
                   }
                 ?>
+              </div>
+              <div class="grid-item no-gutter item-s-4 text-align-right margin-bottom-basic">
+                <?php return_pdf_links($pr_pdf_en, $pr_pdf_es) ?>
               </div>
             </div>
           </div>

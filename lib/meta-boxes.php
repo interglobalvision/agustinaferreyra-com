@@ -64,8 +64,8 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_field( array(
-		'name' => esc_html__( 'Show title in archive', 'cmb2' ),
-		'id'   => $prefix . 'exhibition_show_title',
+		'name' => esc_html__( 'Emphasize_title', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_emphasize_title',
 		'type' => 'checkbox',
 	) );
 
