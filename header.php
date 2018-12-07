@@ -39,10 +39,17 @@ get_template_part('partials/seo');
             <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
             <div class="dot"></div>
           </li>
+        <?php
+          $num_artists = count(get_posts(array('post_type' => 'artist')));
+          if ($num_artists > 0) {
+        ?>
           <li class="grid-item hover-dot">
             <a href="<?php echo home_url('artists'); ?>">Artists</a>
             <div class="dot"></div>
           </li>
+        <?php
+          }
+        ?>
           <li class="grid-item hover-dot">
             <a href="<?php echo home_url('everything-else'); ?>">Everything else</a>
             <div class="dot"></div>
