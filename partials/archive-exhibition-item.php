@@ -5,9 +5,10 @@ $start = get_post_meta($post->ID, '_igv_exhibition_start', true);
 $end = get_post_meta($post->ID, '_igv_exhibition_end', true);
 $location = wp_get_post_terms($post->ID, 'location');
 $emphasize_title = get_post_meta($post->ID, '_igv_exhibition_emphasize_title', true);
+$offsite_url = get_post_meta($post->ID, '_igv_exhibition_offsite_url', true);
 ?>
-<article <?php post_class('grid-item item-s-12 grid-row no-gutter hover-dot margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
-  <a href="<?php the_permalink() ?>" class="grid-item item-s-12 grid-row no-gutter">
+<article <?php post_class('grid-item item-s-12 grid-row no-gutter hover-dot margin-bottom-small' . (!empty($offsite_url) ? ' offsite-item' : '')); ?> id="post-<?php the_ID(); ?>">
+  <a href="<?php echo !empty($offsite_url) ? $offsite_url : get_the_permalink() ?>" class="grid-item item-s-12 grid-row no-gutter">
     <div class="grid-item item-s-12 item-m-6 font-uppercase margin-bottom-micro">
     <?php
       if (!empty($emphasize_title) && !empty($title)) {
