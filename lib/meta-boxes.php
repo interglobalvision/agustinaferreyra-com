@@ -58,9 +58,15 @@ function igv_cmb_metaboxes() {
 	) );
 
   $exhibition_metabox->add_field( array(
-		'name' => esc_html__( 'Exhibition title', 'cmb2' ),
+		'name' => esc_html__( 'Exhibition Title', 'cmb2' ),
 		'id'   => $prefix . 'exhibition_title',
 		'type' => 'text',
+	) );
+
+  $exhibition_metabox->add_field( array(
+		'name' => esc_html__( 'Offsite Link', 'cmb2' ),
+		'id'   => $prefix . 'exhibition_offsite_url',
+		'type' => 'text_url',
 	) );
 
   $exhibition_metabox->add_field( array(
