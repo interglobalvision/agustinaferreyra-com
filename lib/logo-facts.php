@@ -121,6 +121,7 @@ class BlogFact {
       'orderby' => 'meta_value_num',
       'meta_key' => '_igv_exhibition_start',
       'posts_per_page' => 1,
+      /* limit by location
       'tax_query' => array(
         array(
           'taxonomy' => 'location',
@@ -128,6 +129,7 @@ class BlogFact {
           'terms'    => 'galeria-agustina-ferreyra',
         ),
     	),
+      */
     );
 
     switch (array_rand($this->facts['expo'])) {
@@ -236,7 +238,7 @@ class BlogFact {
         $expo_query->the_post();
 
         $string = $this->facts['expo']['closed'];
-        echo get_the_title();
+
         $expo_end_date = get_post_meta(get_the_ID(), '_igv_exhibition_end', true);
 
         $value = abs($this->timeNow - $expo_end_date)/60/60/24;
