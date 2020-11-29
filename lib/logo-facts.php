@@ -2,8 +2,8 @@
 class BlogFact {
   private $facts = array(
     'weather' => array(
-      'temp' => 'Current temp in CDMX is %d&deg;C',
-      'conditions' => '%s in CDMX',
+      'temp' => 'Current temp in San Juan, PR is %d&deg;C',
+      'conditions' => '%s in San Juan, PR',
     ),
     'expo' => array(
       'closes' => 'The current expo closes in %d days',
@@ -63,7 +63,7 @@ class BlogFact {
       // Wrapped in try/catch to catch exceptions
       try {
         // Requests weather data
-        $res = $client->request('GET', 'http://api.openweathermap.org/data/2.5/weather?id=3530597&units=metric&appid=' . $api_key);
+        $res = $client->request('GET', 'http://api.openweathermap.org/data/2.5/weather?id=4568138&units=metric&appid=' . $api_key);
 
         // Decode the response's body
         $weatherRes = json_decode($res->getBody());
