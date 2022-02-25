@@ -50,10 +50,6 @@ get_template_part('partials/seo');
         <?php
           }
         ?>
-          <li class="grid-item hover-dot">
-            <a href="<?php echo home_url('everything-else'); ?>">Everything else</a>
-            <div class="dot"></div>
-          </li>
         </ul>
       </nav>
       <div id="logo-holder-mobile" class="padding-top-mid">
