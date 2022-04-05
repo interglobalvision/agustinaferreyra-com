@@ -9,6 +9,10 @@ get_header();
 <main id="main-content">
   <section id="posts">
     <div class="container">
+      <div class="grid-row">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6">
+        </div>
+      </div>
     </div>
   </section>
 </main>
