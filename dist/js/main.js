@@ -454,7 +454,7 @@ var Site = function () {
       this.windowHeight = this.$window.height();
       this.windowWidth = this.$window.width();
 
-      //this.setDotDiameter();
+      this.setDotDiameter();
       this.positionPostit();
       //this.sizeLogoHolder();
       this.layoutMasonry();
@@ -484,14 +484,14 @@ var Site = function () {
       this.$logo = $('#logo-holder .logo');
       this.$logoMobile = $('#logo-holder-mobile .logo');
 
-      /*let logoDots = [];
-      $('.logo-dot').each(function() {
+      var logoDots = [];
+      $('.logo-dot').each(function () {
         logoDots.push({
           ref: $(this),
           hasFallen: false
         });
       });
-      this.logoDots = logoDots;*/
+      this.logoDots = logoDots;
 
       this.setDotDiameter();
       this.positionPostit();
@@ -616,9 +616,12 @@ var Site = function () {
           _this.masonryInstance.layout();
         });
 
-        /*_this.masonryInstance.on('layoutComplete', function() {
+        _this.masonryInstance.on('layoutComplete', function () {
           _this.bindDotDrop();
-        });*/
+        });
+      } else {
+
+        _this.bindDotDrop();
       }
     }
   }, {

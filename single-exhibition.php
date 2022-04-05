@@ -65,12 +65,6 @@ if (have_posts()) {
         <div id="masonry-holder" class="hidden">
           <div class="masonry-gutter"></div>
 
-          <div id="logo-holder" class="masonry-item">
-            <div>
-              <?php get_template_part('partials/logo'); ?>
-            </div>
-          </div>
-
         <?php
           if (!empty(get_the_content())) {
         ?>

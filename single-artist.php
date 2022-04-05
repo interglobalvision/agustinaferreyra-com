@@ -35,12 +35,6 @@ if (have_posts()) {
         <div id="masonry-holder" class="hidden">
           <div class="masonry-gutter"></div>
 
-          <div id="logo-holder" class="masonry-item">
-            <div>
-              <?php get_template_part('partials/logo'); ?>
-            </div>
-          </div>
-
           <div class="masonry-item grid-row">
             <div class="grid-item item-s-8 no-gutter text-align-justify js-fix-widows">
               <?php the_content(); ?>
