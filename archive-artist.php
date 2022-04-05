@@ -6,14 +6,11 @@ get_header();
   <section id="posts">
     <div class="container">
       <div class="grid-row flex-nowrap">
-        <div id="logo-holder" class="grid-item flex-grow item-m-6">
-          <?php get_template_part('partials/logo'); ?>
-        </div>
-        <div class="grid-item item-s-12 item-m-6 grid-row align-self-start">
+        <div class="grid-item item-s-12 item-m-6 offset-m-6">
 <?php
 if (have_posts()) {
 ?>
-          <ul>
+          <ul id="artists-list">
 <?php
   while (have_posts()) {
     the_post();

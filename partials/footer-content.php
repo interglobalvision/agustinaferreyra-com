@@ -6,19 +6,19 @@
 ?>
 
 <footer id="footer" class="margin-top-basic padding-bottom-mid">
-  <?php echo !is_home() ? '<div class="container">' : ''; ?>
+  <div class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-12 <?php echo !is_home() ? 'item-m-6' : ''; ?>">
-        <div id="footer-holder" class="border-top padding-top-tiny">
-          <div class="font-uppercase font-heavy font-size-mid">
-            <a href="<?php echo home_url(); ?>">Galería Agustina Ferreyra</a>
-          </div>
-          <?php echo !empty($hours) ? '<div class="margin-top-tiny">' . $hours . '</div>' : ''; ?>
-          <?php echo !empty($address) ? '<div class="margin-top-tiny">' . apply_filters('the_content', $address) . '</div>' : ''; ?>
-          <?php echo !empty($email) ? '<div class="margin-top-tiny"><a href="mailto:' . $email . '">' . $email . '</a></div>' : ''; ?>
+      <div class="grid-item item-s-12">
+        <div class="border-top padding-top-tiny"></div>
+      </div>
+      <div class="grid-item item-s-12 item-l-6 margin-bottom-small">
+        <div class="font-uppercase font-heavy font-size-mid">
+          <a href="<?php echo home_url(); ?>">Galería Agustina Ferreyra</a>
         </div>
       </div>
+      <div class="grid-item item-s-12 item-l-6 no-gutter">
+        <?php get_template_part('partials/mailinglist-form'); ?>
+      </div>
     </div>
-    <?php get_template_part('partials/mailinglist-form'); ?>
-  <?php echo !is_home() ? '</div>' : ''; ?>
+  </div>
 </footer>

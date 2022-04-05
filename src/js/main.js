@@ -28,11 +28,11 @@ class Site {
     this.windowHeight = this.$window.height();
     this.windowWidth = this.$window.width();
 
-    this.setDotDiameter();
+    //this.setDotDiameter();
     this.positionPostit();
-    this.sizeLogoHolder();
+    //this.sizeLogoHolder();
     this.layoutMasonry();
-    this.repositionFallenLogoDots();
+    //this.repositionFallenLogoDots();
   }
 
   onReady() {
@@ -57,29 +57,29 @@ class Site {
     this.$logo = $('#logo-holder .logo');
     this.$logoMobile = $('#logo-holder-mobile .logo');
 
-    let logoDots = [];
+    /*let logoDots = [];
     $('.logo-dot').each(function() {
       logoDots.push({
         ref: $(this),
         hasFallen: false
       });
     });
-    this.logoDots = logoDots;
+    this.logoDots = logoDots;*/
 
     this.setDotDiameter();
     this.positionPostit();
     this.bindHoverDots();
     this.initMasonry();
     this.initCarousel();
-    this.sizeLogoHolder();
+    //this.sizeLogoHolder();
     this.bindPostitDrag();
   }
 
   fixWidows() {
     // utility class mainly for use on headines to avoid widows [single words on a new line]
-    $('.js-fix-widows').each(function(){
+    $('.js-fix-widows').each(function () {
       var string = $(this).html();
-      string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
+      string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
       $(this).html(string);
     });
   }
@@ -137,10 +137,10 @@ class Site {
       _this.positionHoverDots();
 
       _this.$hoverDotItem.on({
-        mouseenter: function(){
+        mouseenter: function () {
           $(this).addClass('show-dot');
         },
-        mouseleave: function(){
+        mouseleave: function () {
           $(this).removeClass('show-dot');
         },
       });
@@ -152,7 +152,7 @@ class Site {
 
     var offset = this.dotDiameter + 10;
 
-    _this.$hoverDot.each(function() {
+    _this.$hoverDot.each(function () {
       var randomTop = _this.randomInt(100 - offset, offset); // min offset% from any edge
       var randomLeft = _this.randomInt(100 - offset, offset);
 
@@ -168,7 +168,7 @@ class Site {
 
     if (_this.$masonryHolder.length) {
 
-      _this.masonryInstance = new Masonry( '#masonry-holder', {
+      _this.masonryInstance = new Masonry('#masonry-holder', {
         itemSelector: '.masonry-item',
         transitionDuration: 0,
         initLayout: false,
@@ -178,17 +178,13 @@ class Site {
       _this.masonryInstance.layout();
       _this.$masonryHolder.removeClass('hidden');
 
-      imagesLoaded('#masonry-holder').on( 'progress', function(imgLoad, image) {
+      imagesLoaded('#masonry-holder').on('progress', function (imgLoad, image) {
         _this.masonryInstance.layout();
       });
 
-      _this.masonryInstance.on('layoutComplete', function() {
+      /*_this.masonryInstance.on('layoutComplete', function() {
         _this.bindDotDrop();
-      });
-
-    } else {
-
-      _this.bindDotDrop();
+      });*/
 
     }
   }
@@ -230,7 +226,7 @@ class Site {
     var carouselActive = false;
 
     if ($('.carousel-trigger').length) {
-      $('.carousel-trigger').on('click', function(e) {
+      $('.carousel-trigger').on('click', function (e) {
         if (!carouselActive) {
           carouselActive = true;
 
@@ -249,7 +245,7 @@ class Site {
         }
       });
 
-      $('#carousel-overlay').on('click', function(e) {
+      $('#carousel-overlay').on('click', function (e) {
         if (!$(e.target).hasClass('slick-arrow')) {
           _this.$body.removeClass('carousel-active');
 
@@ -285,11 +281,11 @@ class Site {
   bindDotDrop() {
     var _this = this;
 
-    _this.$window.on('scroll', function() {
+    _this.$window.on('scroll', function () {
       let scrollTop = _this.$window.scrollTop();
       let footerTop = _this.$footer.offset().top;
 
-      $.each(_this.logoDots, function(index, value) {
+      $.each(_this.logoDots, function (index, value) {
         let startOffset = value.ref.offset().top;
         let distance = footerTop - startOffset - _this.dotDiameter;
 
@@ -306,14 +302,14 @@ class Site {
 
     // randomly offset bounce duration
     // more realistic looking
-    const durationOffset =  _this.randomInt(500, -500);
+    const durationOffset = _this.randomInt(500, -500);
 
-    $dot.animate({  textIndent: distance }, {
-      step: function(now,fx) {
-        $(this).css('transform','translateY('+now+'px)');
+    $dot.animate({ textIndent: distance }, {
+      step: function (now, fx) {
+        $(this).css('transform', 'translateY(' + now + 'px)');
       },
       duration: distance + durationOffset,
-    },'easeOutBounce');
+    }, 'easeOutBounce');
   }
 
   repositionFallenLogoDots() {
@@ -324,7 +320,7 @@ class Site {
 
     let footerTop = _this.$footer.offset().top;
 
-    $.each(_this.logoDots, function(index, value) {
+    $.each(_this.logoDots, function (index, value) {
       if (value.hasFallen) {
         value.ref.css('transform', 'translateY(0)');
 
@@ -338,8 +334,8 @@ class Site {
 
   handleMouseup() {
     $('body')
-    .off('mousemove', this.handleDragging)
-    .off('mouseup', this.handleMouseup);
+      .off('mousemove', this.handleDragging)
+      .off('mouseup', this.handleMouseup);
     $('#postit').removeClass('grabbing');
   }
 
@@ -347,13 +343,13 @@ class Site {
     const left = window.drag.offset0.left + (e.pageX - window.drag.pageX0);
     const top = window.drag.offset0.top + (e.pageY - window.drag.pageY0);
     $(window.drag.elem)
-    .offset({top: top, left: left});
+      .offset({ top: top, left: left });
   }
 
   bindPostitDrag(e) {
     let _this = this;
 
-    $('#postit').mousedown(function(e){
+    $('#postit').mousedown(function (e) {
       $(this).addClass('grabbing');
       window.drag = {};
       window.drag.pageX0 = e.pageX;
@@ -362,9 +358,9 @@ class Site {
       window.drag.offset0 = $(this).offset();
 
       $('body')
-      .on('mouseup', _this.handleMouseup)
-      .on('mousemove', _this.handleDragging);
-      });
+        .on('mouseup', _this.handleMouseup)
+        .on('mousemove', _this.handleDragging);
+    });
   }
 }
 
@@ -374,21 +370,21 @@ new Mailchimp();
 // eastOutBounce easing
 $.easing.jswing = $.easing.swing;
 
-$.extend( $.easing,
-{
-  def: 'easeOutBounce',
-  swing: function (x, t, b, c, d) {
-    return $.easing[$.easing.def](x, t, b, c, d);
-  },
-  easeOutBounce: function (x, t, b, c, d) {
-    if ((t/=d) < (1/2.75)) {
-      return c*(7.5625*t*t) + b;
-    } else if (t < (2/2.75)) {
-      return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
-    } else if (t < (2.5/2.75)) {
-      return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
-    } else {
-      return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+$.extend($.easing,
+  {
+    def: 'easeOutBounce',
+    swing: function (x, t, b, c, d) {
+      return $.easing[$.easing.def](x, t, b, c, d);
+    },
+    easeOutBounce: function (x, t, b, c, d) {
+      if ((t /= d) < (1 / 2.75)) {
+        return c * (7.5625 * t * t) + b;
+      } else if (t < (2 / 2.75)) {
+        return c * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75) + b;
+      } else if (t < (2.5 / 2.75)) {
+        return c * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375) + b;
+      } else {
+        return c * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375) + b;
+      }
     }
-  }
-});
+  });

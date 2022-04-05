@@ -28,33 +28,15 @@
   .desktop-only
     display: initial !important
 
+  // ******************************************************
+
   // HEADER
 
+  .logo-svg 
+    margin: 0
+
   #main-nav-list-row
-    justify-content: normal
-
-  .dot
-    width: 12.25px
-    height: 12.25px
-    border-radius: 12.25px
-
-  .logo
-    transform: translateY(-($margin-basic))
-    width: 350px
-
-  .logo-svg
-    width: 350px
-
-  #logo-holder
-    width: auto
-    padding-left: $margin-tiny
-    padding-right: $margin-tiny
-    display: block
-    .logo
-      display: inline-block
-
-  #logo-holder-mobile
-    display: none
+    justify-content: flex-start
 
   .wp-caption
     font-size: $font-size-tiny
@@ -71,6 +53,13 @@
     display: inline-block
     border-bottom: none
     padding-bottom: 0
+
+  // ******************************************************
+
+  // ARTISTS 
+
+  #artists-list 
+    text-align: left
 
   // ******************************************************
 

@@ -454,11 +454,11 @@ var Site = function () {
       this.windowHeight = this.$window.height();
       this.windowWidth = this.$window.width();
 
-      this.setDotDiameter();
+      //this.setDotDiameter();
       this.positionPostit();
-      this.sizeLogoHolder();
+      //this.sizeLogoHolder();
       this.layoutMasonry();
-      this.repositionFallenLogoDots();
+      //this.repositionFallenLogoDots();
     }
   }, {
     key: 'onReady',
@@ -484,21 +484,21 @@ var Site = function () {
       this.$logo = $('#logo-holder .logo');
       this.$logoMobile = $('#logo-holder-mobile .logo');
 
-      var logoDots = [];
-      $('.logo-dot').each(function () {
+      /*let logoDots = [];
+      $('.logo-dot').each(function() {
         logoDots.push({
           ref: $(this),
           hasFallen: false
         });
       });
-      this.logoDots = logoDots;
+      this.logoDots = logoDots;*/
 
       this.setDotDiameter();
       this.positionPostit();
       this.bindHoverDots();
       this.initMasonry();
       this.initCarousel();
-      this.sizeLogoHolder();
+      //this.sizeLogoHolder();
       this.bindPostitDrag();
     }
   }, {
@@ -616,12 +616,9 @@ var Site = function () {
           _this.masonryInstance.layout();
         });
 
-        _this.masonryInstance.on('layoutComplete', function () {
+        /*_this.masonryInstance.on('layoutComplete', function() {
           _this.bindDotDrop();
-        });
-      } else {
-
-        _this.bindDotDrop();
+        });*/
       }
     }
   }, {

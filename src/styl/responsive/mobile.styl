@@ -29,7 +29,7 @@ html, body
 
 #main-container
   min-width: 100%
-  min-height: 100vh
+  min-height: 80vh
 
 .border-top
   border-top: $border-style
@@ -103,13 +103,12 @@ html, body
   position: relative
   display: inline-block
   transform: translateY(-($margin-basic))
-  width: 280px
+  width: 200px
   z-index: 900
 
 .logo-svg
-  width: 100%
   height: auto
-  width: 280px
+  width: 200px
 
 .logo-dot
   text-indent: 0
@@ -164,8 +163,12 @@ html, body
 
 // HEADER
 
+.logo-svg
+  display: block
+  margin: 0 auto
+
 #main-nav-list-row
-  justify-content: space-between
+  justify-content: center
 
 // ******************************************************
 
@@ -176,6 +179,13 @@ html, body
   width: 100%
   border-bottom: $border-style
   text-transform: uppercase
+
+// ******************************************************
+
+// ARTISTS 
+
+#artists-list 
+  text-align: center
 
 // ******************************************************
 

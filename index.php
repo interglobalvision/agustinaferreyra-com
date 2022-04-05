@@ -7,9 +7,6 @@ get_header();
     <div class="container">
       <div class="grid-row align-items-start">
         <div id="blog-info" class="grid-item item-s-12 item-m-6 no-gutter grid-row">
-          <div class="grid-item item-s-12 desktop-only">
-            <?php get_template_part('partials/logo'); ?>
-          </div>
           <div class="grid-item item-s-12 no-gutter">
             <?php get_template_part('partials/footer-content'); ?>
           </div>

@@ -33,27 +33,33 @@ get_template_part('partials/seo');
     <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
 
     <div class="container">
-      <nav id="main-nav">
-        <ul id="main-nav-list-row" class="grid-row font-uppercase font-bold">
-          <li class="grid-item offset-m-6 hover-dot">
-            <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
-            <div class="dot"></div>
-          </li>
-        <?php
-          $num_artists = count(get_posts(array('post_type' => 'artist')));
-          if ($num_artists > 0) {
-        ?>
-          <li class="grid-item hover-dot">
-            <a href="<?php echo home_url('artists'); ?>">Artists</a>
-            <div class="dot"></div>
-          </li>
-        <?php
-          }
-        ?>
-        </ul>
-      </nav>
-      <div id="logo-holder-mobile" class="padding-top-mid">
-        <?php get_template_part('partials/logo'); ?>
+      <div class="grid-row">
+        <div class="grid-item item-s-12 item-m-4 item-l-6 margin-bottom-mid">
+          <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo.svg'); ?></a>
+        </div>
+        <nav id="main-nav" class="grid-item item-s-12 item-m-8 item-l-6">
+          <ul id="main-nav-list-row" class="grid-row flex-nowrap font-uppercase font-bold">
+            <li class="grid-item hover-dot">
+              <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>
+              <div class="dot"></div>
+            </li>
+            <?php
+              $num_artists = count(get_posts(array('post_type' => 'artist')));
+              if ($num_artists > 0) {
+            ?>
+              <li class="grid-item hover-dot">
+                <a href="<?php echo home_url('artists'); ?>">Artists</a>
+                <div class="dot"></div>
+              </li>
+            <?php
+              }
+            ?>
+            <li class="grid-item hover-dot">
+              <a href="<?php echo home_url('contact'); ?>">Contact</a>
+              <div class="dot"></div>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </header>
