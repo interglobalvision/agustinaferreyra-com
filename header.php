@@ -37,7 +37,7 @@ get_template_part('partials/seo');
         <div class="grid-item item-s-12 item-m-4 item-l-6 margin-bottom-mid">
           <a href="<?php echo home_url(); ?>"><?php get_template_part('partials/logo.svg'); ?></a>
         </div>
-        <nav id="main-nav" class="grid-item item-s-12 item-m-8 item-l-6">
+        <nav id="main-nav" class="grid-item no-gutter item-s-12 item-m-8 item-l-6">
           <ul id="main-nav-list-row" class="grid-row flex-nowrap font-uppercase font-bold">
             <li class="grid-item hover-dot">
               <a href="<?php echo home_url('exhibitions'); ?>">Exhibitions</a>

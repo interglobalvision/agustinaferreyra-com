@@ -1,9 +1,9 @@
 <?php
 get_header();
-?>
 
-<?php
-  $site_options = get_site_option('_igv_site_options');
+if (have_posts()) {
+  while (have_posts()) {
+    the_post();
 ?>
 
 <main id="main-content">
@@ -11,6 +11,7 @@ get_header();
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6 offset-m-6">
+          <?php the_content(); ?>
         </div>
       </div>
     </div>
@@ -18,5 +19,8 @@ get_header();
 </main>
 
 <?php
+  } 
+}
+
 get_footer();
 ?>
